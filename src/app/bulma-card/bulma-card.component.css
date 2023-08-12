@@ -31,3 +31,23 @@
       font-size: 19px;
     }
   }
+
+  @media screen and (max-width: 1024px) {
+    .title {
+      font-size: 24;
+    }
+  }
+  
+  /* Szélesképernyő */
+  @media screen and (min-width: 1216px) {
+    .title {
+      font-size: 24;
+    }
+  }
+  
+  /* Teljes HD */
+  @media screen and (min-width: 1408px) {
+    .title {
+      font-size: 24px;
+    }
+  }
