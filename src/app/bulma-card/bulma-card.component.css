@@ -3,3 +3,21 @@
 .card:hover{
     transform: scale(1.01);
 }
+
+.has-fixed-height {
+    height: 200px; /* Itt megadhatod a kívánt fix magasságot */
+    overflow: auto; /* Túlcsordulás esetén görgetősáv jelenik meg */
+}
+
+.cim-fixed{
+    height: 60px;
+}
+
+.card{
+    position: relative;
+    top: 30px;
+}
+
+.container{
+    margin-bottom: 60px;
+}
