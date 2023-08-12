@@ -1,3 +1,5 @@
+@import '~bulma/css/bulma.css';
+
 .navbar-container {
     position: fixed;
     top: 0;
@@ -7,3 +9,5 @@
     background-color: #fff; /* Példa háttérszín, a saját stílusodhoz igazítsd */
     z-index: 999; /* Egyéb elemek mögé helyezi a navbart */
   }
+
+ 

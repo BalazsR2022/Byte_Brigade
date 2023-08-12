@@ -5,12 +5,14 @@ import { MatCardModule } from "@angular/material/card";
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BulmaCardComponent } from './bulma-card/bulma-card.component';
+import { BulmaFooterComponent } from './bulma-footer/bulma-footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    BulmaCardComponent
+    BulmaCardComponent,
+    BulmaFooterComponent
   ],
   imports: [
     BrowserModule,
