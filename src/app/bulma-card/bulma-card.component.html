@@ -1,25 +1,27 @@
 <div class="container">
-    <div class="columns prodList is-multiline is-variable">
-        <div class="column konyvecske is-one-third">
-            <div class="card has-background-grey-lighter">
-                <div class="card-image">
-                    <figure class="is-4by3">
-                        <img src="assets/10.png" alt="Placeholder image" class="image">
-                    </figure>
-                </div>
-                <div class="card-content">
-                    <div class="media">
-                        <div class="media-content">
-                            <p class="title is-4 cim cim-fixed">Cím</p>
-                            <p class="subtitle is-6 szerzo">Szerző</p>
+    <div *ngIf="jsonData">
+        <div class="columns prodList is-multiline is-variable">
+            <div class="column konyvecske is-one-third"  *ngFor="let book of jsonData">
+                <div class="card has-background-grey-lighter">
+                    <div class="card-image">
+                        <figure class="is-4by3">
+                            <img src="../assets/{{book.image}}.png" alt="Placeholder image" class="image">
+                        </figure>
+                    </div>
+                    <div class="card-content">
+                        <div class="media">
+                            <div class="media-content">
+                                <p class="title is-4 cim cim-fixed">{{ book.title }}</p>
+                                <p class="subtitle is-6 szerzo">{{ book.author }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="content leiras has-fixed-height">
-                        Leírás
-                    </div>
-                    <div class="level">
-                        <div class="level-left level-item"><button class="button is-info gomb">Gomb</button></div>
-                        <div class="level-right level-item year subtitle ">Évjárat</div>
+                        <div class="content leiras has-fixed-height">
+                            {{ book.description }}
+                        </div>
+                        <div class="level">
+                            <div class="level-left level-item"><button class="button is-info gomb">Gomb</button></div>
+                            <div class="level-right level-item year subtitle">{{book.year}}</div>
+                        </div>
                     </div>
                 </div>
             </div>

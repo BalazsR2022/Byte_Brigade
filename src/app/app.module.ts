@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { BulmaCardComponent } from './bulma-card/bulma-card.component';
 import { BulmaFooterComponent } from './bulma-footer/bulma-footer.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { BulmaFooterComponent } from './bulma-footer/bulma-footer.component';
     BrowserModule,
     MatCardModule,
     MatToolbarModule,
+    HttpClientModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
