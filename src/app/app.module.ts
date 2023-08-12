@@ -8,6 +8,7 @@ import { BulmaCardComponent } from './bulma-card/bulma-card.component';
 import { BulmaFooterComponent } from './bulma-footer/bulma-footer.component';
 import { HttpClientModule } from '@angular/common/http';
 
+
 @NgModule({
   declarations: [
     AppComponent,

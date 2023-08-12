@@ -20,34 +20,29 @@
     margin-bottom: 60px;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 768px) and (min){
     .title{
         font-size: 24px;
     }
   }
 
-  @media screen and (min-width: 769px) {
-    .title {
-      font-size: 19px;
+  @media screen and (min-width: 768px) and (max-width: 1024px) {
+    .title{
+      font-size:24px;
     }
   }
-
-  @media screen and (max-width: 1024px) {
-    .title {
-      font-size: 24;
-    }
-  }
+  
   
   /* Szélesképernyő */
   @media screen and (min-width: 1216px) {
     .title {
-      font-size: 24;
+      font-size: 24px;
     }
   }
   
   /* Teljes HD */
   @media screen and (min-width: 1408px) {
     .title {
-      font-size: 24px;
+      font-size: 26px;
     }
   }
