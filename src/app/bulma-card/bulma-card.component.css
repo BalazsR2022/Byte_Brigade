@@ -2,11 +2,6 @@
     transform: scale(1.01);
 }
 
-.has-fixed-height {
-    height: 200px; /* Itt megadhatod a kívánt fix magasságot */
-    overflow: auto; /* Túlcsordulás esetén görgetősáv jelenik meg */
-}
-
 .cim-fixed{
     height: 60px;
 }
@@ -24,25 +19,35 @@
     .title{
         font-size: 24px;
     }
+    .has-fixed-height{
+      height: 600px;
+      overflow: hidden;
+    }
   }
 
   @media screen and (min-width: 768px) and (max-width: 1024px) {
     .title{
       font-size:24px;
     }
+    
   }
-  
-  
-  /* Szélesképernyő */
+
   @media screen and (min-width: 1216px) {
     .title {
       font-size: 24px;
     }
+    .has-fixed-height {
+      height: 200px; /* Itt megadhatod a kívánt fix magasságot */
+      overflow:auto; /* Túlcsordulás esetén görgetősáv jelenik meg */
+  }
   }
   
-  /* Teljes HD */
   @media screen and (min-width: 1408px) {
     .title {
       font-size: 26px;
     }
+    .has-fixed-height {
+      height: 200px; /* Itt megadhatod a kívánt fix magasságot */
+      overflow:auto; /* Túlcsordulás esetén görgetősáv jelenik meg */
+  }
   }
