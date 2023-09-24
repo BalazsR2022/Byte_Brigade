@@ -7,6 +7,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BulmaCardComponent } from './bulma-card/bulma-card.component';
 import { BulmaFooterComponent } from './bulma-footer/bulma-footer.component';
 import { HttpClientModule } from '@angular/common/http';
+import { AppRoutingModule } from './app-routing.module';
+import { ServiceComponent } from './service/service.component';
+import { HomeComponent } from './home/home.component';
 
 
 @NgModule({
@@ -14,13 +17,16 @@ import { HttpClientModule } from '@angular/common/http';
     AppComponent,
     NavbarComponent,
     BulmaCardComponent,
-    BulmaFooterComponent
+    BulmaFooterComponent,
+    ServiceComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     MatCardModule,
     MatToolbarModule,
     HttpClientModule,
+    AppRoutingModule,
     
   ],
   providers: [],
