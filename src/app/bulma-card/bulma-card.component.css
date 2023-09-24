@@ -37,8 +37,8 @@
       font-size: 24px;
     }
     .has-fixed-height {
-      height: 200px; /* Itt megadhatod a kívánt fix magasságot */
-      overflow:auto; /* Túlcsordulás esetén görgetősáv jelenik meg */
+      height: 200px; 
+      overflow:auto; 
   }
   }
   
@@ -47,7 +47,7 @@
       font-size: 26px;
     }
     .has-fixed-height {
-      height: 200px; /* Itt megadhatod a kívánt fix magasságot */
-      overflow:auto; /* Túlcsordulás esetén görgetősáv jelenik meg */
+      height: 200px; 
+      overflow:auto; 
   }
   }
