@@ -12,6 +12,7 @@ import { ServiceComponent } from './service/service.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
+import { SignupComponent } from './signup/signup.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { AboutComponent } from './about/about.component';
     ServiceComponent,
     HomeComponent,
     ContactComponent,
-    AboutComponent
+    AboutComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
