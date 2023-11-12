@@ -12,7 +12,6 @@ export class NavbarComponent implements OnInit {
 
     $navbarBurgers.forEach(el => {
       el.addEventListener('click', () => {
-        console.log("Megnyomtál!");
         const target = el.dataset.target;
         const $target = document.getElementById(target);
 
