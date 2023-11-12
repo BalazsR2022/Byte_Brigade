@@ -1,6 +1,6 @@
 .hero:hover{
     transform: scale(1.02);
-    background-color: rgba(101, 189, 160, 0.4);
+    background-color: rgba(31, 58, 49, 0.4);
     color: black;
 }
 .hero{
