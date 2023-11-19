@@ -3,9 +3,9 @@
     top: 0;
     left: 0;
     right: 0;
-    height: 3rem; /* Változtathatod a magasságot igény szerint */
-    background-color: #fff; /* Példa háttérszín, a saját stílusodhoz igazítsd */
-    z-index: 999; /* Egyéb elemek mögé helyezi a navbart */
+    height: 3rem; 
+    background-color: #fff; 
+    z-index: 999; 
   }
 
  
