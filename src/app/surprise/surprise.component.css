@@ -2,13 +2,22 @@
     transform: scale(1.01);
 }
 
+.h1{
+  text-align: center;
+}
 .cim-fixed{
     height: 60px;
+}
+.box{
+  text-align: center;
 }
 
 .card{
     position: relative;
     top: 30px;
+}
+.button{
+  text-align: center;
 }
 
 .container{

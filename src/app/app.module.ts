@@ -14,6 +14,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { SignupComponent } from './signup/signup.component';
 import { SurpriseComponent } from './surprise/surprise.component';
+import { RedbuttonComponent } from './redbutton/redbutton.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SurpriseComponent } from './surprise/surprise.component';
     ContactComponent,
     AboutComponent,
     SignupComponent,
-    SurpriseComponent
+    SurpriseComponent,
+    RedbuttonComponent
   ],
   imports: [
     BrowserModule,
