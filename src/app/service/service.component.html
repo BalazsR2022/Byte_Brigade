@@ -1,52 +1,100 @@
-<app-navbar></app-navbar>
-        <section class="section">
-            <section class="hero is-link mt-2">
-                <div class="hero-body">
-                    <p class="is-size-3">
-                        A szolgáltatásról
-                    </p>
-                    <p class="subtitle is-family-secondary">
-                        A Bookhub egy ingyenes online könyvcsere platform, ahol az olvasók egyedi lehetőséget találnak arra, 
-                        hogy kedvenc könyveiket másokkal cseréljék meg. Ezen a virtuális könyvtérben a különféle olvasási élmények összetalálkoznak, 
-                        és a felhasználók egyszerűen és kényelmesen oszthatják meg és fedezhetik fel új könyveiket. 
-                        A szolgáltatás nem csupán könyvek cseréjét kínálja, hanem egy közösséget is, 
-                        ahol az olvasók megoszthatják élményeiket és tippeket, 
-                        így inspirálva egymást a következő olvasmányuk kiválasztásában.
-                    </p>
-                </div>
-            </section>
-            <section class="hero is-link mt-2">
-                <div class="hero-body">
-                    <p class="is-size-3">
-                        A felajánlásról
-                    </p>
-                    <p class="subtitle is-family-secondary">
-                        A Bookhub egy különleges lehetőség arra, hogy könyveid ne csak porosodjanak a polcodon, 
-                        hanem találjanak új otthont és gazdát. 
-                        Fedezd fel a könyvcsere kalandját, ahol nem csak olvasol, hanem megoszthatod és cserélheted is a kedvenc történeteidet. 
-                        Minden felhasználó ajánlhat fel könyveket, amikre már nincs szüksége. Ezekre a könyvekre lehet jelentkezni, 
-                        majd a felek megegyezése alapján a könyv gazdát cserél.
-                        A BOOKHUB A HELY, AHOL MINDEN KÖNYVNEK VAN EGY TÖRTÉNETE, ÉS MINDEN TÖRTÉNETNEK EGY ÚJ OTTHONA.
-                    </p>
-                </div>
-            </section>
-            <section class="hero is-link mt-2">
-                <div class="hero-body">
-                    <p class="is-size-3">
-                        Az alapítókról
-                    </p>
-                    <p class="subtitle is-family-secondary">
-                        A Bookhub mögött 3 szenvedélyes olvasó áll, akik álmodoztak egy olyan közösségről, 
-                        ahol a könyvek szeretetét és az olvasási élményeket megosztva lehet fejleszteni. 
-                        Réka, a csapat vezetője, egy kreatív könyvmoly, aki mindig is arra vágyott, 
-                        hogy könyvek cseréje által megossza saját élményeit és felfedezze mások ízlését. 
-                        Laci, a fejlesztő, egy technológiai zseni, aki azért állt össze Rékával, hogy létrehozza ezt a platformot, 
-                        és egyszerűvé tegye a könyvcsere folyamatát. Dia pedig a közösségi menedzser, 
-                        aki imádja a könyveket és az új kalandokat, arra vágyik, hogy mindenkinek része lehessen ebben a könyvmoly-közösségben. 
-                        A Bokkhub az olvasás, az öröm és a közösség egy új dimenziója.
-                    </p>
-                </div>
-            </section>
-        </section>
-    <app-bulma-footer></app-bulma-footer>
+<style>
+    .hero {
+        position: relative;
+        height: 300px; /* Állítsd be a megfelelő magasságot */
+    }
 
+    .image-section {
+        height: 100%;
+    }
+
+    .overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255, 255, 255, 0.5); /* Áttetsző fehér háttér */
+    }
+
+    .hero-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: #000; /* Szöveg színe */
+    }
+</style>
+
+<app-navbar></app-navbar>
+
+<section class="section">
+    <div class="hero is-link mt-2">
+        <div class="image-section" style="background: url('assets/fig3.png') top center / cover no-repeat;">
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="service-section">
+                <p class="is-size-3">
+                    A szolgáltatásról
+                </p>
+                <p class="subtitle is-family-secondary">
+                    A Bookhub egy ingyenes online könyvcsere platform, ahol az olvasók egyedi lehetőséget találnak arra, 
+                    hogy kedvenc könyveiket másokkal cseréljék meg. Ezen a virtuális könyvtérben a különféle olvasási élmények összetalálkoznak, 
+                    és a felhasználók egyszerűen és kényelmesen oszthatják meg és fedezhetik fel új könyveiket. 
+                    A szolgáltatás nem csupán könyvek cseréjét kínálja, hanem egy közösséget is, 
+                    ahol az olvasók megoszthatják élményeiket és tippeket, 
+                    így inspirálva egymást a következő olvasmányuk kiválasztásában.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="hero is-link mt-2">
+        <div class="image-section" style="background: url('assets/3maci_ 2.jpg') top center / cover no-repeat;">
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content">
+            <div class="donation-part">
+                <p class="is-size-3">
+                    A felajánlásról
+                </p>
+                <p class="subtitle is-family-secondary">
+                    A Bookhub egy különleges lehetőség arra, hogy könyveid ne csak porosodjanak a polcodon, 
+                    hanem találjanak új otthont és gazdát. 
+                    Fedezd fel a könyvcsere kalandját, ahol nem csak olvasol, hanem megoszthatod és cserélheted is a kedvenc történeteidet. 
+                    Minden felhasználó ajánlhat fel könyveket, amikre már nincs szüksége. Ezekre a könyvekre lehet jelentkezni, 
+                    majd a felek megegyezése alapján a könyv gazdát cserél.
+                    A BOOKHUB A HELY, AHOL MINDEN KÖNYVNEK VAN EGY TÖRTÉNETE, ÉS MINDEN TÖRTÉNETNEK EGY ÚJ OTTHONA.
+
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="hero is-link mt-2">
+        <div class="image-section" style="background: url('assets/3maci_ 3.jpg') top center / cover no-repeat;">
+            <div class="overlay"></div>
+        </div>
+        <div class="hero-content">
+            <p class="is-size-3">
+                Az alapítókról
+            </p>
+            <p class="subtitle is-family-secondary">
+                A Bookhub mögött 3 szenvedélyes olvasó áll, akik álmodoztak egy olyan közösségről, 
+                ahol a könyvek szeretetét és az olvasási élményeket megosztva lehet fejleszteni. 
+                Réka, a csapat vezetője, egy kreatív könyvmoly, aki mindig is arra vágyott, 
+                hogy könyvek cseréje által megossza saját élményeit és felfedezze mások ízlését. 
+
+            </p>
+        </div>
+    </div>
+</section>
+
+<app-bulma-footer></app-bulma-footer>
