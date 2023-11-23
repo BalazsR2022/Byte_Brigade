@@ -7,6 +7,7 @@ import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
 import { SignupComponent } from './signup/signup.component';
 import { SurpriseComponent } from './surprise/surprise.component';
+import { RedbuttonComponent } from './redbutton/redbutton.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path:'contact', component:ContactComponent, pathMatch:'full' },
   { path:'about', component:AboutComponent, pathMatch:'full' },
   { path:'signup', component:SignupComponent, pathMatch:'full' },
-  { path:'surprise', component:SurpriseComponent, pathMatch:'full' }
+  { path:'surprise', component:SurpriseComponent, pathMatch:'full' },
+  { path:'redbutton', component:RedbuttonComponent, pathMatch:'full' }
 ];
 
 @NgModule({
