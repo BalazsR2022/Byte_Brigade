@@ -6,3 +6,27 @@
 .hero{
     color:aqua;
 }
+/*.section {
+    background: url('/assets/stack_books.png') top center / cover no-repeat;
+}*/
+.is-size-3, .is-family-secondary {
+    font-weight: bold;
+}
+.section {
+    margin-bottom: 20px; 
+}
+.section {
+    margin-top: 50px;
+}
+.green-button {
+    background-color: #00d1b2;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+  }
+  .lilac-text {
+    color: rgb(102, 17, 17);
+    font-weight: bold;
+    font-size: 22px;
+}
