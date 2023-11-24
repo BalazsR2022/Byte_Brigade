@@ -17,6 +17,7 @@ import { SurpriseComponent } from './surprise/surprise.component';
 import { RedbuttonComponent } from './redbutton/redbutton.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +31,7 @@ import { RedbuttonComponent } from './redbutton/redbutton.component';
     SignupComponent,
     SurpriseComponent,
     RedbuttonComponent
+
   ],
   imports: [
     BrowserModule,
