@@ -1,8 +1,47 @@
-.hero:hover{
-    transform: scale(1.02);
-    background-color: rgba(31, 58, 49, 0.4);
-    color: black;
+.maintitle {
+    font-size: 56px;
+    color: white;
+    text-align: center;
+    line-height: 300px;
+    opacity: 1; /* Alapértelmezett láthatóság */
+    transition: opacity 0.5s ease;
 }
-.hero{
-    color:aqua;
+
+.image-section {
+    margin-right: 200px;
+    margin-left: 200px;
+    position: relative;
+    overflow: hidden;
+}
+.overlay {
+    position: relative;
+    height: 100%;
+    width: 100%;
+}
+
+.overlay-title,
+.overlay-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.overlay-content {
+    display: none;
+}
+
+.image-section:hover .maintitle {
+    opacity: 0; /* Teljesen eltűnik, amikor a kurzor a képen van */
+}
+
+.image-section:hover .overlay-title {
+    opacity: 0; /* Eltűnik a háttér, amikor a kurzor a képen van */
+}
+
+.image-section:hover .overlay-content {
+    display: block;
+    opacity: 0.99; /* Fokozatosan megjelenik az overlay tartalma */
 }
