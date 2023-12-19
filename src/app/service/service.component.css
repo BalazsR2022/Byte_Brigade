@@ -1,18 +1,35 @@
+
 .maintitle {
-    font-size: 56px;
+    font-size: 72px;
     color: white;
     text-align: center;
     line-height: 300px;
-    opacity: 1; /* Alapértelmezett láthatóság */
+    opacity: 1;
     transition: opacity 0.5s ease;
 }
 
 .image-section {
-    margin-right: 200px;
-    margin-left: 200px;
+    margin-right: 15%;
+    margin-left: 15%;
     position: relative;
     overflow: hidden;
+    border-radius: 2%;
+    background: url('src/assets/stack_books.png') center / cover no-repeat;
+    height: 33.33%;
 }
+
+.section:nth-child(1) .image-section {
+    background-position: center top;
+}
+
+.section:nth-child(2) .image-section {
+    background-position: center center;
+}
+
+.section:nth-child(3) .image-section {
+    background-position: center bottom;
+}
+
 .overlay {
     position: relative;
     height: 100%;
@@ -34,14 +51,26 @@
 }
 
 .image-section:hover .maintitle {
-    opacity: 0; /* Teljesen eltűnik, amikor a kurzor a képen van */
+    opacity: 0; 
 }
 
 .image-section:hover .overlay-title {
-    opacity: 0; /* Eltűnik a háttér, amikor a kurzor a képen van */
+    opacity: 0;
 }
 
 .image-section:hover .overlay-content {
     display: block;
-    opacity: 0.99; /* Fokozatosan megjelenik az overlay tartalma */
+    opacity: 0.99; 
 }
+
+.hero-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: black;
+    width: 80%;
+     
+}
+
