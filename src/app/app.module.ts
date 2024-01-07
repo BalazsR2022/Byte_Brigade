@@ -15,6 +15,7 @@ import { AboutComponent } from './about/about.component';
 import { SignupComponent } from './signup/signup.component';
 import { SurpriseComponent } from './surprise/surprise.component';
 import { RedbuttonComponent } from './redbutton/redbutton.component';
+import { UserComponent } from './user/user.component';
 
 
 @NgModule({
@@ -29,7 +30,10 @@ import { RedbuttonComponent } from './redbutton/redbutton.component';
     AboutComponent,
     SignupComponent,
     SurpriseComponent,
-    RedbuttonComponent
+    RedbuttonComponent,
+    UserComponent,
+
+
   ],
   imports: [
     BrowserModule,
