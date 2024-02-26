@@ -10,6 +10,8 @@
 }
 .box{
   text-align: center;
+  position: center;
+  
 }
 
 .card{
@@ -49,6 +51,12 @@
       height: 200px; 
       overflow:auto; 
   }
+  .box{
+    margin-left: 20rem;
+    height: 20rem;
+    width: 20rem;
+  }
+
   }
   
   @media screen and (min-width: 1408px) {
@@ -56,7 +64,13 @@
       font-size: 26px;
     }
     .has-fixed-height {
-      height: 200px; 
+      height: 100px; 
       overflow:auto; 
   }
+  .box{
+    margin-left: 30rem;
+    width: 30rem;
+    height: 30rem;
+  }
+
   }

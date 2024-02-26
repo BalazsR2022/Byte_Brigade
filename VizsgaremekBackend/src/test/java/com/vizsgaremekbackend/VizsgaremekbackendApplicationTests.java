@@ -1,10 +1,10 @@
-package com.example.VizsgaremekBackend;
+package com.vizsgaremekbackend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class VizsgaremekBackendApplicationTests {
+class VizsgaremekbackendApplicationTests {
 
 	@Test
 	void contextLoads() {
