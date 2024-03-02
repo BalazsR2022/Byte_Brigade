@@ -12,15 +12,10 @@ import java.util.List;
 
 @RestController
 public class BookController {
-    private VizsgaremekbackendApplication bookService;
 
-    public BookController(VizsgaremekbackendApplication bookService) {
-        this.bookService = bookService;
-    }
-    @GetMapping("/Books")
-    public ResponseEntity<List<Book>> getBooks() {
-        List<Book> todos = bookService.getBooks();
-        return ResponseEntity.status(HttpStatus.OK).body(todos);
+    @GetMapping("/books")
+    public String getBooks() {
+        return "Books végpont";
     }
 
 
