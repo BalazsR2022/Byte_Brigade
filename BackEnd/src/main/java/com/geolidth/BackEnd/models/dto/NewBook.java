@@ -1,4 +1,4 @@
-package com.geolidth.BackEnd.models;
+package com.geolidth.BackEnd.models.dto;
 
 public class NewBook {
     private String title;

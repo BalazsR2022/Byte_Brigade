@@ -1,9 +1,8 @@
 package com.geolidth.BackEnd.Controllers;
 
-import com.geolidth.BackEnd.models.Book;
-import com.geolidth.BackEnd.models.NewBook;
+import com.geolidth.BackEnd.models.dao.Book;
+import com.geolidth.BackEnd.models.dto.NewBook;
 import com.geolidth.BackEnd.services.BookService;
-import com.geolidth.BackEnd.services.BookServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,6 +31,6 @@ public class BookController {
 
     }
 
-    
+
 
  }

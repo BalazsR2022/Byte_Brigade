@@ -1,7 +1,7 @@
 package com.geolidth.BackEnd.services;
 
-import com.geolidth.BackEnd.models.Book;
-import com.geolidth.BackEnd.models.NewBook;
+import com.geolidth.BackEnd.models.dao.Book;
+import com.geolidth.BackEnd.models.dto.NewBook;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
