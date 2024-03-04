@@ -18,8 +18,10 @@ public class Book {
     private String category;
     private boolean canBeBooked;
 
-    public Book(Integer id, String title, String author, String publisher, String category, boolean canBeBooked) {
-        this.id = id;
+    public Book() {
+    }
+
+    public Book(String title, String author, String publisher, String category, boolean canBeBooked) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
