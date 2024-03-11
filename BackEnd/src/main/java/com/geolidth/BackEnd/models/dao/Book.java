@@ -8,25 +8,32 @@ public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(length = 150)
+    @Column(length = 100)
     private String title;
     @Column(length = 50)
     private String author;
-    @Column(length = 40)
+    @Column(length = 50)
     private String publisher;
     @Column(length = 30)
     private String category;
-    private boolean canBeBooked;
+    @Column(length = 50)
+    private String county;
+    @Column(length = 50)
+    private String condition;
+    private Integer OwnerId;
+
 
     public Book() {
     }
 
-    public Book(String title, String author, String publisher, String category, boolean canBeBooked) {
+    public Book(String title, String author, String publisher, String category, String county, String condition) {
         this.title = title;
         this.author = author;
         this.publisher = publisher;
         this.category = category;
-        this.canBeBooked = canBeBooked;
+        this.county = county;
+        this.condition = condition;
+
     }
 
 
@@ -60,12 +67,15 @@ public class Book {
     public void setCategory(String category) {
         this.category = category;
     }
-    public boolean isCanBeBooked() {
-        return canBeBooked;
-    }
-    public void setCanBeBooked(boolean canBeBooked) {
-        this.canBeBooked = canBeBooked;
-    }
+    public String getCounty() { return county; }
+    public void setCounty(String county) { this.county = county; }
+    public String getCondition() { return condition; }
+    public void setCondition(String condition) { this.condition = condition; }
+    public Integer getOwnerId() { return OwnerId; }
+    public void setOwnerId(Integer ownerId) { OwnerId = ownerId; }
+
+
+
 
 
 
