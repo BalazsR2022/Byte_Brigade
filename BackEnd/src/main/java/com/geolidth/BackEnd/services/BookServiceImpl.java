@@ -12,18 +12,14 @@ import java.util.Optional;
 @Service
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
-
     public BookServiceImpl(BookRepository bookRepository) {
         this.bookRepository = bookRepository;
-
     }
-
     @Override
     public List<Book> getBooks() {
         return bookRepository.findAll();
 
     }
-
     @Override
     public Book save(NewBook newBook) {
         Book book = new Book(
@@ -35,17 +31,12 @@ public class BookServiceImpl implements BookService {
                 newBook.getCounty(),
                 newBook.getCondition());
         return bookRepository.save(book);
-
     }
-
     @Override
     public Book updateBook(int id, UpdatedBook updatedBook) {
         Optional<Book> optionalBook = bookRepository.findById(id);
-
         if (optionalBook.isPresent()) {
-
             Book existingBook = optionalBook.get();
-
             existingBook.setTitle(updatedBook.getTitle());
             existingBook.setAuthor(updatedBook.getAuthor());
             existingBook.setPublisher(updatedBook.getPublisher());
@@ -53,14 +44,11 @@ public class BookServiceImpl implements BookService {
             existingBook.setCounty(updatedBook.getCounty());
             existingBook.setCondition(updatedBook.getCondition());
 
-
             return bookRepository.save(existingBook);
         } else {
             throw new BookNotFoundException("Ezzel az azonosítóval könyv nem található: " + id);
         }
     }
-
-
     @Override
     public boolean deleteBook(int id) {
         Optional<Book> optionalBook = bookRepository.findById(id);
@@ -71,6 +59,5 @@ public class BookServiceImpl implements BookService {
             return false;
         }
     }
-    
 }
 
