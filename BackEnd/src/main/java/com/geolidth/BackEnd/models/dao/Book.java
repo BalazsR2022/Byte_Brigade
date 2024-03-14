@@ -26,7 +26,8 @@ public class Book {
     public Book() {
     }
 
-    public Book(String title, String author, String publisher, String category, String county, String condition) {
+    public Book(Integer id, String title, String author, String publisher, String category, String county, String condition) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.publisher = publisher;
