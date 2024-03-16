@@ -1,6 +1,8 @@
 package com.geolidth.BackEnd.Controllers;
 
-import com.geolidth.BackEnd.models.dto.UpdatedBook;
+import com.geolidth.BackEnd.exceptions.NoSuchBookException;
+import com.geolidth.BackEnd.models.dto.ErrorMessage;
+import com.geolidth.BackEnd.models.dto.UpdateBook;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dto.NewBook;
 import com.geolidth.BackEnd.services.BookService;
@@ -31,12 +33,15 @@ public class BookController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody UpdatedBook updatedBook) {
-        Book updatedBookResult = bookService.updateBook(id, updatedBook);
-        if (updatedBookResult != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(updatedBookResult);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    public ResponseEntity<?> updateBook(@PathVariable int id, @RequestBody UpdateBook updateBook) {
+
+        try {
+            Book updatedBook = bookService.updateBook(id, updateBook);
+            return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
+        } catch (NoSuchBookException e) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body(new ErrorMessage(e.getMessage()));
         }
     }
 
