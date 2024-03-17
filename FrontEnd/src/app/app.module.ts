@@ -17,6 +17,7 @@ import { SurpriseComponent } from './surprise/surprise.component';
 import { RedbuttonComponent } from './redbutton/redbutton.component';
 import { UserComponent } from './user/user.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     SurpriseComponent,
     RedbuttonComponent,
     UserComponent,
+    LoginComponent,
 
 
   ],

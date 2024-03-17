@@ -11,6 +11,9 @@
  background-size:cover;
  min-height: 90vh;
 }
+h2{
+    opacity: 0.8;
+}
 .select{
     opacity: 0.5;
 }
