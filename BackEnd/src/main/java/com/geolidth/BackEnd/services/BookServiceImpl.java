@@ -6,11 +6,13 @@ import com.geolidth.BackEnd.models.dto.NewBook;
 import com.geolidth.BackEnd.models.dto.UpdateBook;
 import com.geolidth.BackEnd.repositories.BookRepository;
 import org.springframework.stereotype.Service;
+import java.util.ArrayList;
 import com.geolidth.BackEnd.exceptions.BookNotFoundException;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
+
 @Service
 public class BookServiceImpl implements BookService {
     private final BookRepository bookRepository;
@@ -20,25 +22,46 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> getBooks() {
         return bookRepository.findAll();
-
     }
     @Override
-    public Book save(NewBook newBook) {
-        Book book = new Book(
-                newBook.getId(),
-                newBook.getTitle(),
-                newBook.getAuthor(),
-                newBook.getPublisher(),
-                newBook.getCategory(),
-                newBook.getCounty(),
-                newBook.getQuality());
-        return bookRepository.save(book);
+    public List<Book> getBooks(Optional<String> q) {
+        if (q.isEmpty()) {
+            return bookRepository.findAll();
+        } else {
+            List<Book> books = new ArrayList<>();
+            books.addAll(bookRepository.findAllByAuthorContainsIgnoreCase(q.get().toLowerCase()));
+            books.addAll(bookRepository.findAllByTitleContainsIgnoreCase(q.get().toLowerCase()));
+            books.addAll(bookRepository.findAllByPublisherContainsIgnoreCase(q.get().toLowerCase()));
+            books.addAll(bookRepository.findAllByCategoryContainsIgnoreCase(q.get().toLowerCase()));
+            books.addAll(bookRepository.findAllByCountyContainsIgnoreCase(q.get().toLowerCase()));
+            books.addAll(bookRepository.findAllByQualityContainsIgnoreCase(q.get().toLowerCase()));
+
+            return books;
+        }
     }
+@Override
+public Book getById(int id) throws NoSuchBookException {
+    return bookRepository.findById(id).orElseThrow(NoSuchBookException::new);
+
+}
+@Override
+public Book save(NewBook newBook) {
+    Book book = new Book(
+            newBook.getId(),
+            newBook.getTitle(),
+            newBook.getAuthor(),
+            newBook.getPublisher(),
+            newBook.getCategory(),
+            newBook.getCounty(),
+            newBook.getQuality());
+    return bookRepository.save(book);
+}
+
     @Override
     public Book updateBook(int id, UpdateBook updateBook) throws NoSuchBookException {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        if (optionalBook.isPresent()) {
-            Book book =optionalBook.get();
+        Optional<Book> bookOptional = bookRepository.findById(id);
+        if (bookOptional.isPresent()) {
+            Book book = bookOptional.get();
             if (updateBook.getTitle() != null && !updateBook.getTitle().isBlank()) {
                 book.setTitle(updateBook.getTitle());
             }
@@ -63,15 +86,16 @@ public class BookServiceImpl implements BookService {
             throw new NoSuchBookException();
         }
     }
-    @Override
-    public boolean deleteBook(int id) {
-        Optional<Book> optionalBook = bookRepository.findById(id);
-        if (optionalBook.isPresent()) {
-            bookRepository.deleteById(id);
-            return true;
-        } else {
-            return false;
-        }
-    }
-}
 
+    @Override
+    public void deleteBook(int id) throws NoSuchBookException {
+        if (bookRepository.existsById(id)) {
+            bookRepository.deleteById(id);
+        } else {
+            throw new NoSuchBookException();
+        }
+
+    }
+
+
+}

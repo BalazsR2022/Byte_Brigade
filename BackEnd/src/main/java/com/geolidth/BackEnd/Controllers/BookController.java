@@ -10,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/books")
@@ -21,9 +23,14 @@ public class BookController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Book>> getBooks() {
-        List<Book> books = bookService.getBooks();
-        return ResponseEntity.status(200).body(books);
+    public ResponseEntity<List<Book>> getBooks(@RequestParam Optional<String> q) {
+        List<Book> books = bookService.getBooks(q);
+        return ResponseEntity.status(HttpStatus.OK).body(books);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Book> getById(@PathVariable int id) {
+        Book book = bookService.getById(id);
+        return ResponseEntity.status(HttpStatus.OK).body(book);
     }
 
     @PostMapping
@@ -33,29 +40,22 @@ public class BookController {
 
     }
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateBook(@PathVariable int id, @RequestBody UpdateBook updateBook) {
-
-        try {
-            Book updatedBook = bookService.updateBook(id, updateBook);
-            return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
-        } catch (NoSuchBookException e) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body(new ErrorMessage(e.getMessage()));
-        }
+    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody UpdateBook updateBook) {
+        Book updatedBook = bookService.updateBook(id, updateBook);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
     }
+
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteBook(@PathVariable int id) {
-        boolean deletionResult = bookService.deleteBook(id);
-        if (deletionResult) {
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
+    public ResponseEntity<?> deleteBook(@PathVariable int id) {
+        bookService.deleteBook(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 
-
+    @ExceptionHandler(NoSuchBookException.class)
+    public ResponseEntity<ErrorMessage> handleNoSuchBookException(NoSuchBookException e) {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(e.getMessage()));
+    }
 
  }
