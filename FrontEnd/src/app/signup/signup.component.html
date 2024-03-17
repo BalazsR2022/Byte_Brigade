@@ -1,19 +1,15 @@
 
 <div class="covering">
-    <app-navbar></app-navbar>
     <section class="section">
-                <div class="container">
-                    <label class="dark">Maximum 30 karakter</label>
-                    <input type="text" placeholder="Név" class="input mt-2 is-info is-large is-rounded has-text-info-dark" required>
-                    <label class="dark">Kérjük valós email címet adjon meg!</label>
-                    <input type="email" placeholder="Emailcím " class="input mt-2 is-info is-large is-rounded has-text-info-dark" required>
-                    <label class="dark">Legalább 8 karakter</label>
-                    <input type="password" placeholder="Jelszó" class="input mt-2 is-info is-large is-rounded has-text-info-dark" required>
+                <form [formGroup]="userForm" (ngSubmit)="saveUserData()">
+                    <input type="text" placeholder="Név" class="input mt-2 is-info is-large is-rounded has-text-info-dark"  formControlName="name" required>
+                    <input type="email" placeholder="Emailcím " class="input mt-2 is-info is-large is-rounded has-text-info-dark" formControlName="email" required >
+                    <input type="password" placeholder="Jelszó" class="input mt-2 is-info is-large is-rounded has-text-info-dark" formControlName="password" [minlength]="8" required>
                     <div class="columns">
                         <div class="column">
                             <div class="select is-info is-rounded mt-2 is-large">
-                                <select class="has-text-info-dark">
-                                  <option>Megyék</option>
+                                <select class="has-text-info-dark" formControlName="county" required>
+                                  <option disabled selected>Megyék</option>
                                   <option>Bács-Kiskun</option>
                                   <option>Baranya</option>
                                   <option>Békés</option>
@@ -37,9 +33,10 @@
                                 </select>
                               </div>
                         </div>
-                        <div class="column"><button class="button is-large is-info is-rounded mt-2">Mehet</button></div>
+                        <div class="column">
+                            <button type="submit" class="button is-large is-info is-rounded mt-2" [disabled]="!userForm.valid">Mehet</button>
+                        </div>
                     </div>
-                </div>
+                </form>
     </section>
-    <app-bulma-footer></app-bulma-footer>
 </div>
