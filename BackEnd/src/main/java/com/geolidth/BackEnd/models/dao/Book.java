@@ -1,5 +1,7 @@
 package com.geolidth.BackEnd.models.dao;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -24,8 +26,10 @@ public class Book {
     private String county;
     @Column(length = 50)
     private String quality;
-    @Column
-    private Integer OwnerId;
+    @ManyToOne
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonProperty(value = "ownerId")
+    private BookUser owner;
 
 
     public Book() {
