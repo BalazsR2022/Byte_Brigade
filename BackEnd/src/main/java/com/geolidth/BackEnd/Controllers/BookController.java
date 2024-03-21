@@ -1,7 +1,5 @@
 package com.geolidth.BackEnd.Controllers;
 
-import com.geolidth.BackEnd.exceptions.NoSuchBookException;
-import com.geolidth.BackEnd.models.dto.ErrorMessage;
 import com.geolidth.BackEnd.models.dto.UpdateBook;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dto.NewBook;
@@ -10,7 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -52,10 +50,5 @@ public class BookController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-
-    @ExceptionHandler(NoSuchBookException.class)
-    public ResponseEntity<ErrorMessage> handleNoSuchBookException(NoSuchBookException e) {
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorMessage(e.getMessage()));
-    }
 
  }
