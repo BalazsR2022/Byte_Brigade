@@ -1,24 +1,26 @@
 package com.geolidth.BackEnd.services;
 
+import com.geolidth.BackEnd.exceptions.ForbiddenActionException;
 import com.geolidth.BackEnd.exceptions.NoSuchBookException;
+import com.geolidth.BackEnd.exceptions.NoSuchUserException;
 import com.geolidth.BackEnd.models.dao.Book;
+import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewBook;
 import com.geolidth.BackEnd.models.dto.UpdateBook;
 import com.geolidth.BackEnd.repositories.BookRepository;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
-import com.geolidth.BackEnd.exceptions.BookNotFoundException;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
+@AllArgsConstructor
 public class BookServiceImpl implements BookService {
+    private  UserService userService;
     private final BookRepository bookRepository;
-    public BookServiceImpl(BookRepository bookRepository) {
-        this.bookRepository = bookRepository;
-    }
+
     @Override
     public List<Book> getBooks() {
         return bookRepository.findAll();
@@ -45,22 +47,21 @@ public Book getById(int id) throws NoSuchBookException {
 
 }
 @Override
-public Book save(NewBook newBook) {
-    Book book = new Book(
-            newBook.getId(),
-            newBook.getTitle(),
-            newBook.getAuthor(),
-            newBook.getPublisher(),
-            newBook.getCategory(),
-            newBook.getCounty(),
-            newBook.getQuality());
+public Book save(Integer userId, NewBook newBook) throws NoSuchUserException {
+    Book book = convertToBook(userId, newBook);
     return bookRepository.save(book);
 }
 
+
     @Override
-    public Book updateBook(int id, UpdateBook updateBook) throws NoSuchBookException {
-        Optional<Book> bookOptional = bookRepository.findById(id);
+    public Book updateBook(Integer userId, Integer bookId, UpdateBook updateBook)
+            throws NoSuchUserException, NoSuchBookException, ForbiddenActionException {
+        BookUser user = userService.getById(userId);
+        Optional<Book> bookOptional = bookRepository.findById(bookId);
         if (bookOptional.isPresent()) {
+            if (!bookOptional.get().getOwner().getId().equals(user.getId())) {
+                throw new ForbiddenActionException();
+            }
             Book book = bookOptional.get();
             if (updateBook.getTitle() != null && !updateBook.getTitle().isBlank()) {
                 book.setTitle(updateBook.getTitle());
@@ -87,15 +88,31 @@ public Book save(NewBook newBook) {
         }
     }
 
-    @Override
-    public void deleteBook(int id) throws NoSuchBookException {
-        if (bookRepository.existsById(id)) {
-            bookRepository.deleteById(id);
-        } else {
-            throw new NoSuchBookException();
+    public void deleteBook(Integer userId, Integer bookId)
+            throws NoSuchUserException, NoSuchBookException, ForbiddenActionException {
+        BookUser user = userService.getById(userId);
+        Optional<Book> book = bookRepository.findById(bookId);
+        if (book.isPresent()) {
+            if (book.get().getOwner().getId().equals(user.getId())) {
+                bookRepository.existsById(bookId);
+            } else {
+                throw new ForbiddenActionException();
+            }
         }
 
     }
-
+    public Book convertToBook(Integer userId, NewBook newBook) throws  NoSuchUserException {
+        BookUser user = userService.getById(userId);
+        Book book = new Book(
+                newBook.getId(),
+                newBook.getTitle(),
+                newBook.getAuthor(),
+                newBook.getPublisher(),
+                newBook.getCategory(),
+                newBook.getCounty(),
+                newBook.getQuality());
+        book.setOwner(user);
+        return book;
+    }
 
 }

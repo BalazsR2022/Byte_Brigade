@@ -32,21 +32,24 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<Book> save(@RequestBody NewBook newBook) {
-        Book savedBook = bookService.save(newBook);
+    public ResponseEntity<Book> save(@RequestHeader Integer userId, @RequestBody NewBook newBook) {
+        Book savedBook = bookService.save(userId, newBook);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
 
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Book> updateBook(@PathVariable int id, @RequestBody UpdateBook updateBook) {
-        Book updatedBook = bookService.updateBook(id, updateBook);
+    @PutMapping("/{bookId}")
+    public ResponseEntity<Book> updateBook(
+            @PathVariable int bookId,
+            @RequestHeader Integer userId,
+            @RequestBody UpdateBook updateBook) {
+        Book updatedBook = bookService.updateBook(userId, bookId, updateBook);
         return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteBook(@PathVariable int id) {
-        bookService.deleteBook(id);
+    public ResponseEntity<?> deleteBook(@PathVariable Integer bookId, @RequestHeader Integer userId) {
+        bookService.deleteBook(userId, bookId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
