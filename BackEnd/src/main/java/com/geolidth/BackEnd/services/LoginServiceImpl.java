@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 public class LoginServiceImpl implements LoginService {
 
     private  UserService userService;
+    private  TokenService tokenService;
     private PasswordEncoder passwordEncoder;
 
     @Override
@@ -21,7 +22,7 @@ public class LoginServiceImpl implements LoginService {
         try {
             UserDetails user = userService.loadUserByUsername(login.getUsername());
             if (passwordEncoder.matches(login.getPassword(), user.getPassword())) {
-                return new Token("cfjvbh");
+                return new Token(tokenService.generateToken(user));
             } else {
                 throw new WrongUsernameOrPasswordException();
             }
