@@ -1,13 +1,32 @@
 package com.geolidth.BackEnd.auth;
+import com.geolidth.BackEnd.models.dao.BookUser;
+import com.geolidth.BackEnd.services.TokenService;
+import com.geolidth.BackEnd.services.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.AllArgsConstructor;
 import org.springframework.lang.NonNullApi;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Optional;
+
+@Component
+@AllArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
+
+    private TokenService tokenService;
+    private UserService userService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -15,16 +34,28 @@ public class JwtFilter extends OncePerRequestFilter {
             filterChain.doFilter(request, response);
             return;
         }
-        // Authorization: Bearer rezrtz.drrg.fdg
+
         String auth = request.getHeader("Authorization");
         if (auth != null && auth.startsWith("Bearer ") && auth.length() > 7) {
             String token = auth.substring(7);
-
+            if (tokenService.isValid(token)) {
+                String username = tokenService.extractUsername(token);
+                setSecurityContext(username);
+            }
         }
         filterChain.doFilter(request, response);
-
     }
-
+    public void setSecurityContext(String username) {
+        try {
+            UserDetails user = userService.loadUserByUsername(username);
+            Authentication auth = new UsernamePasswordAuthenticationToken(
+                    user, null, new ArrayList<>());
+            if (SecurityContextHolder.getContext().getAuthentication() == null){
+                SecurityContextHolder.getContext().setAuthentication(auth);
+            }
+        } catch (UsernameNotFoundException e) {
+        }
+    }
     public boolean isPublicEndpoint(HttpServletRequest request) {
         if (request.getMethod().equals("POST") && request.getServletPath().equals("/users")) {
             return true;

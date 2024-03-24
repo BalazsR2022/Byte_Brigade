@@ -1,5 +1,7 @@
 package com.geolidth.BackEnd.services;
 
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
@@ -25,13 +27,29 @@ public class JwtTokenService implements TokenService {
         Key key = Keys.hmacShaKeyFor(tokenSecret.getBytes(StandardCharsets.UTF_8));
         return Jwts.builder()
                 .claim("username", user.getUsername())
-                .setExpiration(expiration) //...
+                .setExpiration(expiration) //...frissítés szükséges
                 .signWith(key)
                 .compact();
     }
 
     @Override
     public boolean isValid(String token) {
-        return false;
+        Claims claims = getAllClaims(token);
+        Date expiration = claims.getExpiration();
+        return expiration.after(new Date());
+    }
+
+    @Override
+    public String extractUsername(String token) {
+        Claims claims = getAllClaims(token);
+        return claims.get("username", String.class);
+    }
+
+    public Claims getAllClaims(String token) {
+        Key key = Keys.hmacShaKeyFor(tokenSecret.getBytes(StandardCharsets.UTF_8));
+        JwtParser parser = Jwts.parser()
+                .setSigningKey(key)        //...frissítés szükséges
+                .build();
+        return parser.parseClaimsJws(token).getBody();     //...frissítés szükséges
     }
 }

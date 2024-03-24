@@ -8,4 +8,6 @@ public interface TokenService {
 
     boolean isValid(String token);
 
+    String extractUsername(String token);
+
 }
