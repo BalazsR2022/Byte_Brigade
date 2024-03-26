@@ -11,4 +11,5 @@ public class NewBook {
     private String category;
     private String county;
     public String quality;
+    public Integer year;
 }

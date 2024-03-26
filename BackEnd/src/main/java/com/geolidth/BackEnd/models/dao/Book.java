@@ -26,6 +26,8 @@ public class Book {
     private String county;
     @Column(length = 50)
     private String quality;
+    @Column(length = 6)
+    private Integer year;
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
     @JsonProperty(value = "ownerId")
@@ -35,7 +37,7 @@ public class Book {
     public Book() {
     }
 
-    public Book(Integer id, String title, String author, String publisher, String category, String county, String quality) {
+    public Book(Integer id, String title, String author, String publisher, String category, String county, String quality, Integer year) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -43,6 +45,7 @@ public class Book {
         this.category = category;
         this.county = county;
         this.quality = quality;
+        this.year = year;
 
     }
 }

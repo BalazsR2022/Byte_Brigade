@@ -37,6 +37,7 @@ public class BookServiceImpl implements BookService {
             books.addAll(bookRepository.findAllByCategoryContainsIgnoreCase(q.get().toLowerCase()));
             books.addAll(bookRepository.findAllByCountyContainsIgnoreCase(q.get().toLowerCase()));
             books.addAll(bookRepository.findAllByQualityContainsIgnoreCase(q.get().toLowerCase()));
+            books.addAll(bookRepository.findAllByYear(Integer.parseInt(q.get())));
 
             return books;
         }
@@ -81,6 +82,9 @@ public Book save(Integer userId, NewBook newBook) throws NoSuchUserException {
             if (updateBook.getQuality() != null && !updateBook.getQuality().isBlank()) {
                 book.setQuality(updateBook.getQuality());
             }
+            if (updateBook.getYear() != null && updateBook.getYear() != 0) {
+                book.setYear(updateBook.getYear());
+            }
 
             return bookRepository.save(book);
         } else {
@@ -110,7 +114,8 @@ public Book save(Integer userId, NewBook newBook) throws NoSuchUserException {
                 newBook.getPublisher(),
                 newBook.getCategory(),
                 newBook.getCounty(),
-                newBook.getQuality());
+                newBook.getQuality(),
+                newBook.getYear());
         book.setOwner(user);
         return book;
     }

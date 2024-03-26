@@ -12,4 +12,5 @@ public class UpdateBook {
     private String category;
     private String county;
     private String quality;
+    private Integer year;
 }
