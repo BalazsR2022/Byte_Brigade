@@ -13,12 +13,16 @@ import java.util.Optional;
 public interface BookService {
     List<Book> getBooks();
     List<Book> getBooks(Optional<String> q);
-    Book getById(int id) throws NoSuchBookException;
-    Book save (Integer userId, NewBook book) throws NoSuchUserException;
-    Book updateBook(Integer userId, Integer bookId, UpdateBook updateBook)
+    Book getById(int id)
+            throws NoSuchBookException;
+    Book save(NewBook newBook)
+            throws NoSuchUserException;
+    Book updateBook(Integer bookId, UpdateBook updateBook)
             throws NoSuchUserException, NoSuchBookException, ForbiddenActionException;
-    void deleteBook(Integer userId, Integer bookId)
+    void deleteBook(Integer bookId)
             throws NoSuchUserException, NoSuchBookException, ForbiddenActionException;
+    void reserveBook(Integer bookId)
+            throws NoSuchBookException;
 
 
 }

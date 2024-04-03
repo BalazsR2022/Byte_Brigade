@@ -48,16 +48,16 @@ public Book getById(int id) throws NoSuchBookException {
 
 }
 @Override
-public Book save(Integer userId, NewBook newBook) throws NoSuchUserException {
-    Book book = convertToBook(userId, newBook);
+public Book save(NewBook newBook) throws NoSuchUserException {
+    Book book = convertToBook(newBook.getId(), newBook);
     return bookRepository.save(book);
 }
 
 
     @Override
-    public Book updateBook(Integer userId, Integer bookId, UpdateBook updateBook)
+    public Book updateBook(Integer bookId, UpdateBook updateBook)
             throws NoSuchUserException, NoSuchBookException, ForbiddenActionException {
-        BookUser user = userService.getById(userId);
+        BookUser user = userService.getById(bookId);
         Optional<Book> bookOptional = bookRepository.findById(bookId);
         if (bookOptional.isPresent()) {
             if (!bookOptional.get().getOwner().getId().equals(user.getId())) {
@@ -92,18 +92,19 @@ public Book save(Integer userId, NewBook newBook) throws NoSuchUserException {
         }
     }
 
-    public void deleteBook(Integer userId, Integer bookId)
+    public void deleteBook(Integer bookId)
             throws NoSuchUserException, NoSuchBookException, ForbiddenActionException {
-        BookUser user = userService.getById(userId);
+        BookUser user = userService.getById(bookId);
         Optional<Book> book = bookRepository.findById(bookId);
         if (book.isPresent()) {
             if (book.get().getOwner().getId().equals(user.getId())) {
-                bookRepository.existsById(bookId);
+                bookRepository.deleteById(bookId);
             } else {
                 throw new ForbiddenActionException();
             }
+        } else {
+            throw new NoSuchBookException();
         }
-
     }
     public Book convertToBook(Integer userId, NewBook newBook) throws  NoSuchUserException {
         BookUser user = userService.getById(userId);
@@ -119,5 +120,17 @@ public Book save(Integer userId, NewBook newBook) throws NoSuchUserException {
         book.setOwner(user);
         return book;
     }
+    @Override
+    public void reserveBook(Integer bookId) throws NoSuchBookException {
+        Optional<Book> optionalBook = bookRepository.findById(bookId);
+        if (optionalBook.isEmpty()) {
+            throw new NoSuchBookException();
+        }
 
+        Book book = optionalBook.get();
+        book.setReserved(true);
+        bookRepository.save(book);
+    }
 }
+
+

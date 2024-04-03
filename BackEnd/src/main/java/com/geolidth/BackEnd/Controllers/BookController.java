@@ -1,5 +1,6 @@
 package com.geolidth.BackEnd.Controllers;
 
+import com.geolidth.BackEnd.exceptions.NoSuchBookException;
 import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.UpdateBook;
 import com.geolidth.BackEnd.models.dao.Book;
@@ -8,6 +9,7 @@ import com.geolidth.BackEnd.services.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -35,8 +37,12 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<Book> save(@RequestBody NewBook newBook, Authentication auth) {
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .noneMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         BookUser user = (BookUser) auth.getPrincipal();
-        Book savedBook = bookService.save(user.getId(), newBook);
+        Book savedBook = bookService.save(new NewBook());
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
 
     }
@@ -44,18 +50,35 @@ public class BookController {
     public ResponseEntity<Book> updateBook(
             @PathVariable int bookId,
             @RequestBody UpdateBook updateBook, Authentication auth) {
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .noneMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         BookUser user = (BookUser) auth.getPrincipal();
-        Book updatedBook = bookService.updateBook(user.getId(), bookId, updateBook);
+        Book updatedBook = bookService.updateBook(bookId, updateBook);
         return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
     }
 
 
     @DeleteMapping("/{bookId}")
     public ResponseEntity<?> deleteBook(@PathVariable Integer bookId, Authentication auth) {
+        if (SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
+                .noneMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
         BookUser user = (BookUser) auth.getPrincipal();
-        bookService.deleteBook(user.getId(), bookId);
+        bookService.deleteBook(bookId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    @PostMapping("/{bookId}/reserve")
+    public ResponseEntity<Void> reserveBook(@PathVariable Integer bookId) {
+        try {
+            bookService.reserveBook(bookId);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        } catch (NoSuchBookException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
- }
+}

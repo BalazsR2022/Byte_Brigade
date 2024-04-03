@@ -2,14 +2,16 @@ package com.geolidth.BackEnd.models.dao;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import javax.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Entity
 @Table(name = "books")
-@Getter
-@Setter
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,14 +30,12 @@ public class Book {
     private String quality;
     @Column(length = 6)
     private Integer year;
+    @Column
+    private boolean reserved;
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
-    @JsonProperty(value = "ownerId")
+    @JsonProperty("ownerId")
     private BookUser owner;
-
-
-    public Book() {
-    }
 
     public Book(Integer id, String title, String author, String publisher, String category, String county, String quality, Integer year) {
         this.id = id;
@@ -46,8 +46,12 @@ public class Book {
         this.county = county;
         this.quality = quality;
         this.year = year;
+    }
 
+    public void reserve() {
+        this.reserved = true;
     }
 }
+
 
 

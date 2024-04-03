@@ -1,40 +1,59 @@
 package com.geolidth.BackEnd.auth;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-import static org.springframework.http.HttpMethod.POST;
-import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
-import static org.springframework.security.web.util.matcher.AntPathRequestMatcher.antMatcher;
-
 @Configuration
 @EnableWebSecurity
-@AllArgsConstructor
-public class SecurityConfig {
-    private JwtFilter jwtFilter;
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+
+
+    private final JwtFilter jwtFilter;
+
+    @Autowired
+    public SecurityConfig(JwtFilter jwtFilter) {
+        this.jwtFilter = jwtFilter;
+    }
+
+    @Override
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http
-                .authorizeHttpRequests((request)-> request
-                        .requestMatchers(antMatcher(POST, "/users")).permitAll()
-                        .requestMatchers(antMatcher(POST, "/login")).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .sessionManagement(management -> management.sessionCreationPolicy(STATELESS))
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .csrf(AbstractHttpConfigurer::disable)
-                .build();
-
-
+    protected AuthenticationManager authenticationManager() throws Exception {
+        return super.authenticationManager();
+    }
+    @Bean
+    public PasswordEncoder passwordEncoder() { return new BCryptPasswordEncoder();
     }
 
 
-
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .authorizeRequests(authorize ->
+                        authorize
+                                .antMatchers("/api/v1/books").permitAll()
+                                .antMatchers("/api/v1/auth/login").permitAll()
+                                .antMatchers("/api/v1/auth/logout").permitAll()
+                                .antMatchers("/api/v1/auth/register").permitAll()
+                                .antMatchers("/api/v1/books/**").hasAnyRole("ADMIN", "USER")
+                                .antMatchers("/api/v1/users/**").hasRole("ADMIN")
+                                .anyRequest().authenticated()
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
+                .csrf(csrf -> csrf.disable());
+    }
 }

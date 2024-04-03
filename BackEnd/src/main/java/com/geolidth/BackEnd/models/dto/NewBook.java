@@ -1,7 +1,11 @@
 package com.geolidth.BackEnd.models.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Data
 public class NewBook {
     private Integer id;
