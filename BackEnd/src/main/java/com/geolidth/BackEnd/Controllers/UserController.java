@@ -12,7 +12,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
@@ -30,11 +34,32 @@ public class UserController {
         this.bookService = bookService;
         this.userService = userService;
     }
-
+    @GetMapping("/user/profile")
+    public ResponseEntity<?> getUserProfile() {
+        UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = userDetails.getUsername();
+        BookUser user = userService.findUserByUsername(username);
+        return ResponseEntity.ok(user);
+    }
     @GetMapping("/{id}")
     public ResponseEntity<BookUser> getUserById(@PathVariable Integer id) {
         return ResponseEntity.status(OK).body(userService.getById(id));
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin/{userId}")
+    public ResponseEntity<BookUser> findUserById(@PathVariable Integer userId) {
+        BookUser user = userService.getById(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin/all")
+    public ResponseEntity<List<BookUser>> getAllUsers() {
+        List<BookUser> users = userService.getAllUsers();
+        return ResponseEntity.status(HttpStatus.OK).body(users);
+    }
+
 
     @PostMapping("/signup")
     public ResponseEntity<BookUser> signUp(@RequestBody NewUser newUser) {
@@ -43,11 +68,6 @@ public class UserController {
     }
 
 
-    @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody UserCredentials userCredentials) {
-        String token = userService.login(userCredentials);
-        return ResponseEntity.status(HttpStatus.OK).body(token);
-    }
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/admin/book")

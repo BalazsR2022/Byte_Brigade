@@ -4,21 +4,20 @@ import com.geolidth.BackEnd.auth.UserCredentials;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewUser;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public interface UserService extends UserDetailsService {
 
-    UserDetails loadUserByUsername(String username);
+    UserDetails loadUserByUsername(String username) throws UsernameNotFoundException;
 
     BookUser save(BookUser newUser);
 
     BookUser getById(Integer id);
-
-    String login(UserCredentials userCredentials);
 
     Book addBook(Book book);
 
@@ -34,9 +33,12 @@ public interface UserService extends UserDetailsService {
 
     BookUser findUserByUsername(String username);
 
+    BookUser findUserById(Integer userId);
+
     List<BookUser> getAllUsers();
 
     Book findBookById(Integer id);
 
     boolean existsByUsername(String username);
+
 }

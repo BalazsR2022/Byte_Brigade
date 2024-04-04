@@ -14,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/admin")
 @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -26,7 +28,11 @@ public class AdminController {
         this.userService = userService;
         this.bookService = bookService;
     }
-
+    @GetMapping("/admin/users")
+    public ResponseEntity<?> getAllUsers() {
+        List<BookUser> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody NewUser newUser) {
         BookUser savedUser = userService.save(new BookUser());

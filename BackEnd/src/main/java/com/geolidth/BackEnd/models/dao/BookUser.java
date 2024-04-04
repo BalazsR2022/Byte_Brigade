@@ -43,7 +43,7 @@ public class BookUser implements UserDetails {
     private List<UserRoles> roles;
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
-    private UserRole role;
+    private UserRole.Role role;
     private boolean isAdmin;
 
     @Override
@@ -54,7 +54,6 @@ public class BookUser implements UserDetails {
         }
         return authorities;
     }
-
 
     @Override
     public boolean isAccountNonExpired() {
@@ -76,17 +75,18 @@ public class BookUser implements UserDetails {
         return true;
     }
 
-    public void setUserRole(UserRole role) {
+    public void setRole(UserRole.Role role) {
         this.role = role;
     }
 
-    public UserRole getRole() {
+    public UserRole.Role getRole() {
         if (role != null) {
             return role;
         } else {
             throw new RuntimeException("Jogosultság nincs beállítva");
         }
     }
+
     public BookUser(NewUser newUser) {
         this.username = newUser.getUsername();
         this.password = newUser.getPassword();

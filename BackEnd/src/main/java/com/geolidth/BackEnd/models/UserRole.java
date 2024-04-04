@@ -1,23 +1,31 @@
 package com.geolidth.BackEnd.models;
 
-import org.springframework.security.core.GrantedAuthority;
+import lombok.Getter;
+import lombok.Setter;
 
-public enum UserRole implements GrantedAuthority {
-    ROLE_ADMIN,
-    ROLE_USER,
-    ROLE_GUEST;
+import javax.persistence.*;
 
-    @Override
-    public String getAuthority() {
-        return name();
+@Setter
+@Getter
+@Entity
+@Table(name = "user_role")
+public class UserRole {
+
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
+    private Role role;
+
+    public enum Role {
+        ADMIN_ROLE,
+        USER_ROLE,
+        GUEST_ROLE
     }
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    public void setId(Integer id) {
-        // Az azonosító beállítása
-    }
+    @Column(name = "name")
+    private String name;
 
-    public Integer getId() {
-        // Az azonosító lekérése
-        return null;
-    }
 }

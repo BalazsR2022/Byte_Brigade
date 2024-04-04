@@ -20,7 +20,4 @@ public class Role {
     @Setter
     private String name;
 
-    @OneToMany(mappedBy = "role")
-    private List<UserRoles> userRoles;
-
 }

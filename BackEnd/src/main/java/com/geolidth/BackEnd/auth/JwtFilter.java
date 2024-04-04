@@ -1,6 +1,8 @@
 package com.geolidth.BackEnd.auth;
 
 import com.geolidth.BackEnd.exceptions.NoSuchUserException;
+import com.geolidth.BackEnd.models.dao.BookUser;
+import com.geolidth.BackEnd.repositories.BookUserRepository;
 import com.geolidth.BackEnd.services.TokenService;
 import com.geolidth.BackEnd.services.UserService;
 import lombok.AllArgsConstructor;
@@ -24,7 +26,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
     private TokenService tokenService;
-    private UserService userService;
+    private BookUserRepository bookUserRepository;
     private static final String AUTHORIZATION_HEADER = "Authorization";
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -46,7 +48,8 @@ public class JwtFilter extends OncePerRequestFilter {
     }
     public void setSecurityContext(String username) {
         try {
-            UserDetails user = userService.loadUserByUsername(username);
+            BookUser user = bookUserRepository.findByUsername(username)
+                    .orElseThrow(() -> new UsernameNotFoundException("Nem található ilyen felhasználó: " + username));
             Authentication auth = new UsernamePasswordAuthenticationToken(
                     user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(auth);

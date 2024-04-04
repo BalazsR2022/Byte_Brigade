@@ -1,5 +1,7 @@
 package com.geolidth.BackEnd.services;
 
+import com.geolidth.BackEnd.auth.AuthenticationResult;
+import com.geolidth.BackEnd.auth.CustomAuthenticationManager;
 import com.geolidth.BackEnd.auth.UserCredentials;
 import com.geolidth.BackEnd.exceptions.NoSuchBookException;
 import com.geolidth.BackEnd.exceptions.NoSuchUserException;
@@ -9,9 +11,6 @@ import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewUser;
 import com.geolidth.BackEnd.repositories.BookRepository;
 import com.geolidth.BackEnd.repositories.BookUserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,25 +22,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-
 public class UserServiceImpl implements UserService {
 
     private final BookRepository bookRepository;
     private final BookUserRepository bookUserRepository;
-    private final JwtTokenService jwtTokenService;
-    private final AuthenticationManager authenticationManager;
 
-    @Autowired
+
     public UserServiceImpl(BookRepository bookRepository,
-                           BookUserRepository bookUserRepository,
-                           JwtTokenService jwtTokenService,
-                           AuthenticationManager authenticationManager) {
+                           BookUserRepository bookUserRepository) {
         this.bookRepository = bookRepository;
         this.bookUserRepository = bookUserRepository;
-        this.jwtTokenService = jwtTokenService;
-        this.authenticationManager = authenticationManager;
     }
-
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -66,23 +57,6 @@ public class UserServiceImpl implements UserService {
     public BookUser getById(Integer id) {
         return bookUserRepository.findById(id)
                 .orElseThrow(() -> new NoSuchUserException(id));
-    }
-
-    @Override
-    public String login(UserCredentials userCredentials) {
-        BookUser user = bookUserRepository.findByUsername(userCredentials.getUsername())
-                .orElseThrow(WrongUsernameOrPasswordException::new);
-        if (!user.getPassword().equals(userCredentials.getPassword())) {
-            throw new WrongUsernameOrPasswordException();
-        }
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        userCredentials.getUsername(),
-                        userCredentials.getPassword()
-                )
-        );
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        return jwtTokenService.generateToken(authentication);
     }
 
     @Override
@@ -123,6 +97,12 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public BookUser findUserByUsername(String username) {
+        return bookUserRepository.findByUsername(username)
+                .orElse(null);
+    }
+
+    @Override
+    public BookUser findUserById(Integer userId) {
         return null;
     }
 
@@ -140,4 +120,6 @@ public class UserServiceImpl implements UserService {
     public boolean existsByUsername(String username) {
         return bookUserRepository.findByUsername(username).isPresent();
     }
+
+
 }
