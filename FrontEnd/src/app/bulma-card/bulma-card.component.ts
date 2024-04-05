@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { JsonReaderService } from '../json-reader.service';
+import { BaseService } from '../base.service';
 
 
 @Component({
@@ -8,16 +9,25 @@ import { JsonReaderService } from '../json-reader.service';
   styleUrls: ['./bulma-card.component.css']
 })
 export class BulmaCardComponent implements OnInit {
-  jsonData: any[] = [];
-  constructor(private jsonReadService: JsonReaderService) {
+  jsonData: any;
+  constructor(private base: BaseService) {
 
   }
 
   ngOnInit(): void {
-    const filePath = "../assets/konyvek.json";
+    /*const filePath = "../assets/konyvek.json";
     this.jsonReadService.readJsonFile(filePath).subscribe({
       next: resp => this.jsonData = resp,
       error: err => console.error(err)
+    });*/
+
+    this.base.getBooks().subscribe({
+      next: (res)=>{
+        this.jsonData=res;
+      },
+      error: (err)=>{
+        console.log('Hiba az oldalon: ' + err);
+      }
     });
   }
 }

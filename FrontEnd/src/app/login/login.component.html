@@ -1,16 +1,16 @@
 
 <section>
-    <form action="submit" class="box columns is-mobile is-centered is-vcentered is-multiline m-6 has-background-success">
+    <form [formGroup]="loginForm" (submit)="login()" class="box columns is-mobile is-centered is-vcentered is-multiline m-6 has-background-success">
         <div class="field column is-half">
             <label for="userEmail" class="label">Emailcím</label>
-            <input name="userEmail" type="email" class="input has-background-success-light" required>
+            <input name="userEmail" type="email" class="input has-background-success-light" formControlName="user" required>
         </div>
         <div class="field column is-half">
             <label for="userPassword" class="label">Jelszó</label>
-            <input type="password" name="userPassword" class="input has-background-success-light" required>
+            <input type="password" name="userPassword" class="input has-background-success-light" formControlName="pass" required>
         </div>
         <div class="column is-centered">
-            <button class="button is-fullwidth is-rounded is-responsive is-info">Gomb</button>
+            <button type="submit" class="button is-fullwidth is-rounded is-responsive is-info">Gomb</button>
         </div>
     </form>
 </section>
