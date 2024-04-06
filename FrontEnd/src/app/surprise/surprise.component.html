@@ -1,31 +1,16 @@
-
-
-
-<app-navbar></app-navbar>
-
-
-<div class="box">
-   <div class="content" >
+<section class="section">
+   <div class="box" >
         
           <h1 class = "h1">Igazi meglepetés vár rád, ha megnyomod a lenti gombot!</h1>
           
-        
-        <div class="image is centered">
+        <div class="image is-centered">
             <figure class="is-4by3">
           <img src="assets/zsakbamackokep.jpg" alt="Placeholder image" class="image">
           </figure>
       </div>
-    
-        <div class="buttons is-centered" >
-              <button class="button is-primary is-rounded has-text-dark" *ngIf="!emptyData">Zsákbamackót kérek</button>
+        <div class="buttons is-centered mt-3" >
+              <button (click)="loadSurprise()" class="button is-primary is-rounded has-text-dark" *ngIf="!emptyData">Zsákbamackót kérek</button>
               <button class="button is-danger is-rounded has-text-warning" routerLink="/redbutton" routerLinkActive="active">Ne nyomd meg kérlek!</button>
         </div>
-         
-
-         
-
-        
-
-
-</div>
-<app-bulma-footer></app-bulma-footer>
+  </div>
+</section>

@@ -24,4 +24,12 @@ export class SurpriseComponent implements OnInit{
     });
   }
 
+  loadSurprise(){
+    this.getRandNumber();
+  }
+
+  getRandNumber(){
+    console.log(this.booksData);
+  }
+
 }

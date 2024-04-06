@@ -12,6 +12,8 @@ private userSubject = new Subject();
   constructor(private http : HttpClient) {
     this.loadBooks();
     this.getBooks();
+    this.loadUsers();
+    this.getBooks();
    }
 
    loadBooks(){
@@ -88,7 +90,7 @@ private userSubject = new Subject();
    }
 
    postUser(body:any){
-    let endpoint = "books";
+    let endpoint = "users";
     let url=this.host+endpoint;
     const result = this.http.post(url,body);
     return result;

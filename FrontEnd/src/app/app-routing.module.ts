@@ -21,7 +21,7 @@ const routes: Routes = [
   { path:'login', component:LoginComponent, pathMatch:'full' },
   { path:'surprise', component:SurpriseComponent, pathMatch:'full' },
   { path:'redbutton', component:RedbuttonComponent, pathMatch:'full' },
-  { path:'user', component:UserComponent, pathMatch:'full' }
+  { path:'users', component:UserComponent, pathMatch:'full' }
 ];
 
 @NgModule({
