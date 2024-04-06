@@ -11,7 +11,7 @@
         <tbody>
             <tr *ngFor="let data of userDatas">
                 <td>{{data.username}}</td>
-                <td>{{data.password}}</td>
+                <td (click)="togglePassword('password')">{{ passwordVisible ? data.password : '******' }}</td>
                 <td>{{data.email}}</td>
                 <td>{{data.role}}</td>
             </tr>

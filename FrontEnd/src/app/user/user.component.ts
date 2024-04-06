@@ -9,8 +9,13 @@ import { BaseService } from '../base.service';
 export class UserComponent implements OnInit{
   userDatas:any;
   emptyData=true;
+  passwordVisible=false;
   constructor(private base: BaseService) {
 
+  }
+
+  togglePassword(key: string) {
+    this.passwordVisible = !this.passwordVisible;
   }
 
   ngOnInit(): void {
