@@ -58,5 +58,18 @@ export class UserComponent implements OnInit{
     });
     this.user={};
   }
+
+  updateUser(data:any){
+    console.log(this.user);
+    this.base.updateUser(data.id,data).subscribe({
+      next: (res)=>{
+        console.log(res);
+        this.base.loadUsers();
+      },
+      error: (err)=>{
+        console.log('Hiba a felhasználó létrehozásakor: ' + err)
+      }
+    });
+  }
   
 }

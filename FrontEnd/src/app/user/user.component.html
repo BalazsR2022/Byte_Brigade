@@ -6,7 +6,7 @@
         </div>
         <div class="field">
             <label for="pass" class="label">Jelszó</label>
-            <input type="text" id="pass" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.pass">
+            <input type="text" id="pass" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.password">
         </div>
         <div class="field">
             <label for="email" class="label">Emailcím</label>
@@ -16,7 +16,7 @@
             <label for="role" class="label">Szerepkör</label>
             <input type="text" id="role" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.role">
         </div>
-        <button type="button" (click)="saveUser()" class="button is-primary">Gomb</button>
+        <button type="button" (click)="saveUser()" class="button is-primary has-text-dark">Felhasználó létrehozása</button>
     </div>
     <table class="table" *ngIf="!emptyData">
         <thead>
@@ -31,13 +31,13 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of userDatas">
-                <td>{{data.username}}</td>
-                <td (click)="togglePassword('password')">{{ passwordVisible ? data.password : '******' }}</td>
-                <td>{{data.email}}</td>
-                <td>{{data.role}}</td>
-                <td><button  class="button is-primary">Módosítás</button></td>
-                <td><button (click)="deleteUser(data)" [id]="data.id" class="button is-danger">Törlés</button></td>
-            </tr>
+                <td><input class="input" type="text" [(ngModel)]="data.username" name="username"></td>
+                <td><input class="input" type="text" [(ngModel)]="data.password" name="password"></td>
+                <td><input class="input" type="email" [(ngModel)]="data.email" name="email"></td>
+                <td><input class="input" type="text" [(ngModel)]="data.role" name="role"></td>
+                <td><button (click)="updateUser(data)" class="button is-primary has-text-dark">Módosítás</button></td>
+                <td><button (click)="deleteUser(data)" [id]="data.id" class="button is-danger has-text-warning">Törlés</button></td>
+              </tr>
         </tbody>
     </table>
     <ng-container *ngIf="emptyData">
