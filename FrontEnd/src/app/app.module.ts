@@ -16,7 +16,7 @@ import { SignupComponent } from './signup/signup.component';
 import { SurpriseComponent } from './surprise/surprise.component';
 import { RedbuttonComponent } from './redbutton/redbutton.component';
 import { UserComponent } from './user/user.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 
 
@@ -35,7 +35,7 @@ import { LoginComponent } from './login/login.component';
     RedbuttonComponent,
     UserComponent,
     LoginComponent,
-
+    
 
   ],
   imports: [
@@ -44,7 +44,8 @@ import { LoginComponent } from './login/login.component';
     MatToolbarModule,
     HttpClientModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BaseService } from '../base.service';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-user',
@@ -11,7 +11,8 @@ export class UserComponent implements OnInit{
   userDatas:any;
   emptyData=true;
   passwordVisible=false;
-  userForm:any;
+  user:any={};
+  name:any;
   constructor(private base: BaseService) {
 
   }
@@ -45,7 +46,17 @@ export class UserComponent implements OnInit{
     });
   }
   saveUser(){
-   
+    console.log(this.user);
+    this.base.postUser(this.user).subscribe({
+      next: (res)=>{
+        console.log(res);
+        this.base.loadUsers();
+      },
+      error: (err)=>{
+        console.log('Hiba a felhasználó létrehozásakor: ' + err)
+      }
+    });
+    this.user={};
   }
   
 }
