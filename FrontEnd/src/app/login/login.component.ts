@@ -28,6 +28,8 @@ export class LoginComponent implements OnInit{
         error: err=>{
           console.log('Hiba a belépés során: ' + err);
         }
-      })
+      });
+      this.loginForm.reset();
+      this.loginForm.patchValue({user:"Hibás adatok!"});
     }
 }

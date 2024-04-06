@@ -1,4 +1,5 @@
 <section class="section">
+    
     <table class="table" *ngIf="!emptyData">
         <thead>
             <tr>
@@ -6,6 +7,8 @@
                 <th>Jelszó</th>
                 <th>Emailcím</th>
                 <th>Szerepkör</th>
+                <th>Módosítás</th>
+                <th>Törlés</th>
             </tr>
         </thead>
         <tbody>
@@ -14,6 +17,8 @@
                 <td (click)="togglePassword('password')">{{ passwordVisible ? data.password : '******' }}</td>
                 <td>{{data.email}}</td>
                 <td>{{data.role}}</td>
+                <td><button  class="button is-primary">Módosítás</button></td>
+                <td><button (click)="deleteUser(data)" [id]="data.id" class="button is-danger">Törlés</button></td>
             </tr>
         </tbody>
     </table>
