@@ -10,6 +10,7 @@ import { BaseService } from '../base.service';
 })
 export class BulmaCardComponent implements OnInit {
   jsonData: any;
+  emptyData =true;
   constructor(private base: BaseService) {
 
   }
@@ -24,9 +25,11 @@ export class BulmaCardComponent implements OnInit {
     this.base.getBooks().subscribe({
       next: (res)=>{
         this.jsonData=res;
+        this.emptyData=false;
       },
       error: (err)=>{
         console.log('Hiba az oldalon: ' + err);
+        this.emptyData=true;
       }
     });
   }

@@ -6,17 +6,20 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
-private url="http://localhost:8080/books";
+private host="http://localhost:8080/";
 private bookSubject = new Subject();
+private userSubject = new Subject();
   constructor(private http : HttpClient) {
     this.loadBooks();
     this.getBooks();
    }
 
    loadBooks(){
-    return this.http.get(this.url).subscribe({
+    let endpoint = "books";
+    let url=this.host+endpoint;
+    return this.http.get(url).subscribe({
       next:(data)=>this.bookSubject.next(data),
-      error:(err)=>console.log("Hiba az adatok lekérésekor: ", err)
+      error:(err)=>console.log("Hiba a könyvek lekérésekor: ", err)
     });
    }
 
@@ -29,19 +32,79 @@ private bookSubject = new Subject();
    }
 
    loadThisBook(id:number){
-    return this.http.get(this.url+"/"+id).subscribe({
+    let endpoint = "books";
+    let url=this.host+endpoint;
+    return this.http.get(url+"/"+id).subscribe({
       next:(data)=>this.bookSubject.next(data),
-      error:(err)=>console.log("Hiba a kijelölt lekérésekor: ", err)
+      error:(err)=>console.log("Hiba a kijelölt könyv lekérésekor: ", err)
     });
    }
 
    postBook(body:any){
-    const result = this.http.post(this.url,body);
+    let endpoint = "books";
+    let url=this.host+endpoint;
+    const result = this.http.post(url,body);
+    return result;
+   }
+
+   updateBook(id:number, body:any){
+    let endpoint = "books/";
+    let url=this.host+endpoint+id;
+    const result = this.http.put(url,body);
     return result;
    }
 
    deleteBook(id:number){
-    const result = this.http.delete(this.url+"/"+id);
+    let endpoint = "books";
+    let url=this.host+endpoint;
+    const result = this.http.delete(url+"/"+id);
+    return result;
+   }
+
+   loadUsers(){
+    let endpoint = "users";
+    let url=this.host+endpoint;
+    return this.http.get(url).subscribe({
+      next:(data)=>this.userSubject.next(data),
+      error:(err)=>console.log("Hiba a felhasználók lekérésekor: ", err)
+    });
+   }
+
+   loadThisUser(id:number){
+    let endpoint = "users";
+    let url=this.host+endpoint;
+    return this.http.get(url+"/"+id).subscribe({
+      next:(data)=>this.bookSubject.next(data),
+      error:(err)=>console.log("Hiba a kijelölt felhasználó lekérésekor: ", err)
+    });
+   }
+
+   getUsers(){
+    return this.userSubject;
+   }
+
+   getThisUser(){
+    return this.userSubject;
+   }
+
+   postUser(body:any){
+    let endpoint = "books";
+    let url=this.host+endpoint;
+    const result = this.http.post(url,body);
+    return result;
+   }
+
+   updateUser(id:number, body:any){
+    let endpoint = "users/";
+    let url=this.host+endpoint+id;
+    const result = this.http.put(url,body);
+    return result;
+   }
+
+   deleteUser(id:number){
+    let endpoint = "users";
+    let url=this.host+endpoint;
+    const result = this.http.delete(url+"/"+id);
     return result;
    }
 }

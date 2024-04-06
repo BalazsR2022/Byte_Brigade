@@ -1,4 +1,4 @@
-<div class="container">
+<section class="section">
     <div *ngIf="jsonData">
         <div class="columns prodList is-multiline is-variable">
             <div class="column konyvecske is-one-third" *ngFor="let book of jsonData">
@@ -27,4 +27,12 @@
             </div>
         </div>
     </div>
-</div>
+
+    <ng-container *ngIf="emptyData">
+        <div class="container">
+            <h1 class="has-text-danger">
+                Nincs betöltendő adat :(
+            </h1>
+        </div>
+    </ng-container>
+</section>
