@@ -13,6 +13,7 @@ import java.util.Optional;
 public interface BookService {
     List<Book> getBooks();
     List<Book> getBooks(Optional<String> q);
+    List<Book> searchBooks(String query);
     Book getById(int id)
             throws NoSuchBookException;
     Book save(NewBook newBook)
@@ -23,6 +24,7 @@ public interface BookService {
             throws NoSuchUserException, NoSuchBookException, ForbiddenActionException;
     void reserveBook(Integer bookId)
             throws NoSuchBookException;
+
 
 
 }

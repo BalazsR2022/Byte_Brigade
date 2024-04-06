@@ -42,23 +42,3 @@ public class RoleServiceImpl implements RoleService {
         return roleRepository.findByName(roleName);
     }
 }
-
-
-
-//@Service
-//public static class RoleService {
-
-  //     return Arrays.asList(UserRole.values());
-  //  }
-  //  }
-
-   // public UserRole getRoleByName(String name) throws NoSuchUserException {
-   //     for (UserRole role : UserRole.values()) {
-   //         if (role.name().equalsIgnoreCase(name)) {
-   //             return role;
-    //        }
-   //     }
-     //   throw new NoSuchUserException();
-   //}
-
-

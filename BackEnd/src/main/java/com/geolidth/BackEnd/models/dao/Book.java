@@ -47,11 +47,6 @@ public class Book {
         this.quality = quality;
         this.year = year;
     }
-
-    public void reserve() {
-        this.reserved = true;
-    }
 }
-
 
 

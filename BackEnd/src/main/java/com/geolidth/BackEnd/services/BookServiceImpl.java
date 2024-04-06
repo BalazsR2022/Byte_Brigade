@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class BookServiceImpl implements BookService {
-    private  UserService userService;
+    private final UserService userService;
     private final BookRepository bookRepository;
 
     @Override
@@ -130,6 +130,25 @@ public Book save(NewBook newBook) throws NoSuchUserException {
         Book book = optionalBook.get();
         book.setReserved(true);
         bookRepository.save(book);
+    }
+
+    @Override
+    public List<Book> searchBooks(String query) {
+        List<Book> allBooks = getBooks();
+
+        List<Book> filteredBooks = new ArrayList<>();
+        for (Book book : allBooks) {
+            if (bookContainsQuery(book, query)) {
+                filteredBooks.add(book);            }
+        }
+
+        return filteredBooks;
+    }
+    private boolean bookContainsQuery(Book book, String query) {
+        return book.getTitle().toLowerCase().contains(query.toLowerCase()) ||
+                book.getAuthor().toLowerCase().contains(query.toLowerCase()) ||
+                book.getPublisher().toLowerCase().contains(query.toLowerCase()) ||
+                book.getCategory().toLowerCase().contains(query.toLowerCase());
     }
 }
 

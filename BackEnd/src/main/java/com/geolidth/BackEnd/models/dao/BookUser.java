@@ -41,6 +41,7 @@ public class BookUser implements UserDetails {
     private List<Book> books;
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<UserRoles> roles;
+    @Setter
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private UserRole.Role role;
@@ -53,6 +54,15 @@ public class BookUser implements UserDetails {
             authorities.add(new SimpleGrantedAuthority(role.toString()));
         }
         return authorities;
+    }
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return username;
     }
 
     @Override
@@ -73,10 +83,6 @@ public class BookUser implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    public void setRole(UserRole.Role role) {
-        this.role = role;
     }
 
     public UserRole.Role getRole() {

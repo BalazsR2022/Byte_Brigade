@@ -27,11 +27,11 @@ import static org.springframework.http.HttpStatus.OK;
 public class UserController {
 
 
-    private final BookService bookService;
+
     private final UserService userService;
 
-    public UserController(BookService bookService, UserService userService) {
-        this.bookService = bookService;
+    public UserController(UserService userService) {
+
         this.userService = userService;
     }
     @GetMapping("/user/profile")
