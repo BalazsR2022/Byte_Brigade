@@ -18,6 +18,7 @@ import { RedbuttonComponent } from './redbutton/redbutton.component';
 import { UserComponent } from './user/user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { ThisBookComponent } from './this-book/this-book.component';
 
 
 @NgModule({
@@ -35,6 +36,7 @@ import { LoginComponent } from './login/login.component';
     RedbuttonComponent,
     UserComponent,
     LoginComponent,
+    ThisBookComponent,
     
 
   ],

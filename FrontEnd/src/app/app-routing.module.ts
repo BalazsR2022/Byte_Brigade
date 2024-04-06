@@ -10,6 +10,8 @@ import { SurpriseComponent } from './surprise/surprise.component';
 import { RedbuttonComponent } from './redbutton/redbutton.component';
 import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
+import { ThisBookComponent } from './this-book/this-book.component';
+import { flush } from '@angular/core/testing';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,7 +23,8 @@ const routes: Routes = [
   { path:'login', component:LoginComponent, pathMatch:'full' },
   { path:'surprise', component:SurpriseComponent, pathMatch:'full' },
   { path:'redbutton', component:RedbuttonComponent, pathMatch:'full' },
-  { path:'users', component:UserComponent, pathMatch:'full' }
+  { path:'users', component:UserComponent, pathMatch:'full' },
+  { path:'thisbook', component:ThisBookComponent, pathMatch:'full' }
 ];
 
 @NgModule({

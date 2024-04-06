@@ -6,30 +6,45 @@ import { BaseService } from '../base.service';
   templateUrl: './surprise.component.html',
   styleUrls: ['./surprise.component.css']
 })
-export class SurpriseComponent implements OnInit{
-  booksData:any;
-  emptyData=false;
-  constructor(private base:BaseService){}
+export class SurpriseComponent implements OnInit {
+  object:any={};
+  arrayBook:any=[];
+  thisBook:any={};
+  emptyData = false;
+  clicked = false;
+  rand!: number;
+  constructor(private base: BaseService) { }
 
   ngOnInit(): void {
+    this.clicked = false;
+    this.initBooks();
+  }
+
+  initBooks() {
     this.base.getBooks().subscribe({
-      next: (res)=>{
-        this.booksData=res;
-        this.emptyData=false;
+      next: (res) => {
+        this.object=res;
+        this.arrayBook=res;
+        this.emptyData = false;
       },
-      error: (err)=>{
+      error: (err) => {
         console.log('Hiba az oldalon: ' + err);
-        this.emptyData=true;
+        this.emptyData = true;
       }
     });
   }
 
-  loadSurprise(){
-    this.getRandNumber();
+  loadSurprise() {
+    if (!this.clicked){ 
+      this.clicked = true;
+    }
+    this.rand = this.getRandomInt(0, (this.arrayBook.length - 1));
+    this.object=this.arrayBook[this.rand];
   }
 
-  getRandNumber(){
-    console.log(this.booksData);
+  getRandomInt(min: number, max: number): number {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   }
-
 }

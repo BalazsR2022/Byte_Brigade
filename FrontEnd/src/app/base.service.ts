@@ -13,7 +13,7 @@ private userSubject = new Subject();
     this.loadBooks();
     this.getBooks();
     this.loadUsers();
-    this.getBooks();
+    this.getUsers();
    }
 
    loadBooks(){
@@ -29,7 +29,8 @@ private userSubject = new Subject();
     return this.bookSubject;
    }
    
-   getThisBook(){
+   getThisBook(id:number){
+    this.loadThisBook(id);
     return this.bookSubject;
    }
 
