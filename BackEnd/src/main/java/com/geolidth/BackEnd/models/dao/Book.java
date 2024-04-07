@@ -30,8 +30,8 @@ public class Book {
     private String quality;
     @Column(length = 6)
     private Integer year;
-    @Column
-    private boolean reserved;
+    @Column(name = "reserved")
+    private Boolean reserved;
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
     @JsonProperty("ownerId")

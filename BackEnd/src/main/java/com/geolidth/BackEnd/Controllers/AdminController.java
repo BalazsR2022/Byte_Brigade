@@ -28,11 +28,23 @@ public class AdminController {
         this.userService = userService;
         this.bookService = bookService;
     }
-    @GetMapping("/admin/users")
-    public ResponseEntity<?> getAllUsers() {
+
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin/all")
+    public ResponseEntity<List<BookUser>> getAllUsers() {
         List<BookUser> users = userService.getAllUsers();
-        return ResponseEntity.ok(users);
+        return ResponseEntity.status(HttpStatus.OK).body(users);
     }
+
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @GetMapping("/admin/{userId}")
+    public ResponseEntity<BookUser> findUserById(@PathVariable Integer userId) {
+        BookUser user = userService.getById(userId);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
+
+
     @PostMapping("/users")
     public ResponseEntity<?> createUser(@RequestBody NewUser newUser) {
         BookUser savedUser = userService.save(new BookUser());
@@ -50,8 +62,8 @@ public class AdminController {
         userService.deleteUser(userId);
         return ResponseEntity.noContent().build();
     }
-
-    @PostMapping("/books")
+}
+    /*@PostMapping("/books")
     public ResponseEntity<?> createBook(@RequestBody NewBook newBook) {
         Book savedBook = bookService.save(newBook);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
@@ -94,3 +106,4 @@ public class AdminController {
     }
 }
 
+*/

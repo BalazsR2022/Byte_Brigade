@@ -28,6 +28,7 @@ public class JwtFilter extends OncePerRequestFilter {
     private TokenService tokenService;
     private BookUserRepository bookUserRepository;
     private static final String AUTHORIZATION_HEADER = "Authorization";
+
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -46,6 +47,7 @@ public class JwtFilter extends OncePerRequestFilter {
         }
         filterChain.doFilter(request, response);
     }
+
     public void setSecurityContext(String username) {
         try {
             BookUser user = bookUserRepository.findByUsername(username)
@@ -63,10 +65,14 @@ public class JwtFilter extends OncePerRequestFilter {
     }
 
     public boolean isPublicEndpoint(HttpServletRequest request) {
-        if (request.getMethod().equals("POST") && request.getServletPath().equals("/users")) {
+        String servletPath = request.getServletPath();
+        if (request.getMethod().equals("POST") && servletPath.equals("/users")) {
             return true;
         }
-        if (request.getMethod().equals("POST") && request.getServletPath().equals("/login")) {
+        if (request.getMethod().equals("POST") && servletPath.equals("/login")) {
+            return true;
+        }
+        if (servletPath.startsWith("/guest")) {
             return true;
         }
         return SecurityContextHolder.getContext().getAuthentication() == null

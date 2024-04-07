@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -133,13 +134,22 @@ public Book save(NewBook newBook) throws NoSuchUserException {
     }
 
     @Override
-    public List<Book> searchBooks(String query) {
+    public List<Book> searchBooks(String query) throws NoSuchBookException {
+        if (query == null) {
+            return Collections.emptyList();
+        }
+
         List<Book> allBooks = getBooks();
 
         List<Book> filteredBooks = new ArrayList<>();
         for (Book book : allBooks) {
             if (bookContainsQuery(book, query)) {
-                filteredBooks.add(book);            }
+                filteredBooks.add(book);
+            }
+        }
+
+        if (filteredBooks.isEmpty()) {
+            throw new NoSuchBookException();
         }
 
         return filteredBooks;

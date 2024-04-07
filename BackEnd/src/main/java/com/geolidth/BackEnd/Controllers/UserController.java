@@ -22,7 +22,7 @@ import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@PreAuthorize("hasRole('ROLE_USER')")
+
 @RequestMapping("/users")
 public class UserController {
 
@@ -35,6 +35,7 @@ public class UserController {
         this.userService = userService;
     }
     @GetMapping("/user/profile")
+    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')") // Hozzáférés engedélyezése bejelentkezett felhasználóknak
     public ResponseEntity<?> getUserProfile() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
@@ -46,19 +47,7 @@ public class UserController {
         return ResponseEntity.status(OK).body(userService.getById(id));
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/admin/{userId}")
-    public ResponseEntity<BookUser> findUserById(@PathVariable Integer userId) {
-        BookUser user = userService.getById(userId);
-        return ResponseEntity.status(HttpStatus.OK).body(user);
-    }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @GetMapping("/admin/all")
-    public ResponseEntity<List<BookUser>> getAllUsers() {
-        List<BookUser> users = userService.getAllUsers();
-        return ResponseEntity.status(HttpStatus.OK).body(users);
-    }
 
 
     @PostMapping("/signup")

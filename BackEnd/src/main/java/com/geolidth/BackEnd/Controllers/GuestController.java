@@ -29,9 +29,9 @@ public class GuestController {
     }
 
     @GetMapping("/books/{id}")
-    public ResponseEntity<Book> getBookById(@PathVariable Integer bookId) {
+    public ResponseEntity<Book> getBookById(@PathVariable Integer id) {
         try {
-            Book book = bookService.getById(bookId);
+            Book book = bookService.getById(id);
             return ResponseEntity.ok(book);
         } catch (NoSuchBookException e) {
             return ResponseEntity.notFound().build();
