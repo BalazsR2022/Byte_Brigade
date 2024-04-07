@@ -1,13 +1,13 @@
 package com.geolidth.BackEnd.models.dao;
 
+import com.geolidth.BackEnd.models.UserRole;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 
-@Setter
-@Getter
+
 @Entity
 @Table(name = "user_roles")
 @Data
@@ -20,8 +20,7 @@ public class UserRoles {
     @JoinColumn(name = "user_id")
     private BookUser user;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id")
-    private Role role;
-
+    @Enumerated(EnumType.STRING)
+    private UserRole.Role role;
 }
+

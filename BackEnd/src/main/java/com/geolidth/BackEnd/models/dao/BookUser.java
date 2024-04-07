@@ -27,25 +27,28 @@ public class BookUser implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Setter
-    @Getter
+
     @Column(length = 50)
     private String username;
-    @Setter
-    @Getter
+
     @JsonIgnore
+    @Column(length = 100)
     private String password;
+
     @JsonIgnore
+    @Column(length = 100)
     private String email;
+
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Book> books;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<UserRoles> roles;
-    @Setter
-    @Column(name = "role")
+
     @Enumerated(EnumType.STRING)
     private UserRole.Role role;
+
+    @Column(name = "is_admin")
     private boolean isAdmin;
+
+    private boolean loggedIn;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -55,6 +58,7 @@ public class BookUser implements UserDetails {
         }
         return authorities;
     }
+
     @Override
     public String getPassword() {
         return password;
@@ -99,5 +103,7 @@ public class BookUser implements UserDetails {
         this.email = newUser.getEmail();
 
     }
+
+
 }
 

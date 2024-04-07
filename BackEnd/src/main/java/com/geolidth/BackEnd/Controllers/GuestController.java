@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@PreAuthorize("hasRole('ROLE_GUSET')")
 @RequestMapping("/guest")
 public class GuestController {
 
@@ -40,7 +39,7 @@ public class GuestController {
     }
 
     @PostMapping("/reserve/{id}")
-    public ResponseEntity<String> reserveBook(@PathVariable Long id, @RequestBody(required = false) UserCredentials userCredentials) {
+    public ResponseEntity<String> reserveBook(@PathVariable Integer id, @RequestBody(required = false) UserCredentials userCredentials) {
         if (userCredentials == null) {
             return new ResponseEntity<>("Belépés szükséges a könyv lefoglalásához.", HttpStatus.UNAUTHORIZED);
         }

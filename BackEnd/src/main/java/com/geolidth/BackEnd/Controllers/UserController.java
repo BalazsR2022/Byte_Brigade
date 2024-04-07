@@ -62,12 +62,10 @@ public class UserController {
 
 
     @PostMapping("/signup")
-    public ResponseEntity<BookUser> signUp(@RequestBody NewUser newUser) {
-        BookUser savedUser = userService.save(new BookUser(newUser));
+    public ResponseEntity<BookUser> signUp(@RequestBody NewUser newUserRequest) {
+        BookUser savedUser = userService.save(new BookUser(newUserRequest));
         return ResponseEntity.status(CREATED).body(savedUser);
     }
-
-
 
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/admin/book")
