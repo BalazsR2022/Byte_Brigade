@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
-private host="http://localhost:8080/";
+private host="http://localhost:8080/guest/";
 private bookSubject = new Subject();
 private userSubject = new Subject();
   constructor(private http : HttpClient) {
