@@ -20,7 +20,7 @@ import java.util.List;
 
 import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.OK;
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 
 @RequestMapping("/users")

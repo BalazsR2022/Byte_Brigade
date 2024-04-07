@@ -10,10 +10,11 @@ export class AuthService {
 
    }
 
-   login(user: string, pass: string) {
+   login(user: string, pass: string, email:string) {
     const authData = {
       name: user,
-      password: pass
+      password: pass,
+      email: email
     }
     let httpHeaders = new HttpHeaders();
     httpHeaders.set('Content-Type', 'application/json');

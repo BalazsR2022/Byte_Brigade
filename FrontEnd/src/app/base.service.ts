@@ -6,7 +6,7 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
-private host="http://localhost:8080/guest/";
+private host="http://localhost:8080/";
 private bookSubject = new Subject();
 private userSubject = new Subject();
   constructor(private http : HttpClient) {
@@ -17,7 +17,7 @@ private userSubject = new Subject();
    }
 
    loadBooks(){
-    let endpoint = "books";
+    let endpoint = "guest/books";
     let url=this.host+endpoint;
     return this.http.get(url).subscribe({
       next:(data)=>this.bookSubject.next(data),
@@ -35,7 +35,7 @@ private userSubject = new Subject();
    }
 
    loadThisBook(id:number){
-    let endpoint = "books";
+    let endpoint = "guest/books";
     let url=this.host+endpoint;
     return this.http.get(url+"/"+id).subscribe({
       next:(data)=>this.bookSubject.next(data),
@@ -44,21 +44,21 @@ private userSubject = new Subject();
    }
 
    postBook(body:any){
-    let endpoint = "books";
+    let endpoint = "guest/books";
     let url=this.host+endpoint;
     const result = this.http.post(url,body);
     return result;
    }
 
    updateBook(id:number, body:any){
-    let endpoint = "books/";
+    let endpoint = "guest/books/";
     let url=this.host+endpoint+id;
     const result = this.http.put(url,body);
     return result;
    }
 
    deleteBook(id:number){
-    let endpoint = "books";
+    let endpoint = "guest/books";
     let url=this.host+endpoint;
     const result = this.http.delete(url+"/"+id);
     return result;

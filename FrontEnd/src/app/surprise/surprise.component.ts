@@ -6,16 +6,17 @@ import { BaseService } from '../base.service';
   templateUrl: './surprise.component.html',
   styleUrls: ['./surprise.component.css']
 })
-export class SurpriseComponent implements OnInit {
+export class SurpriseComponent implements OnInit  {
   object:any={};
   arrayBook:any=[];
   thisBook:any={};
   emptyData = false;
   clicked = false;
   rand!: number;
+  image:any="regény";
   constructor(private base: BaseService) { }
 
-  ngOnInit(): void {
+  ngOnInit (): void {
     this.clicked = false;
     this.initBooks();
   }
@@ -40,6 +41,7 @@ export class SurpriseComponent implements OnInit {
     }
     this.rand = this.getRandomInt(0, (this.arrayBook.length - 1));
     this.object=this.arrayBook[this.rand];
+    this.image=this.object.category;
   }
 
   getRandomInt(min: number, max: number): number {

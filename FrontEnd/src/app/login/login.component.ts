@@ -14,16 +14,19 @@ export class LoginComponent implements OnInit{
     ngOnInit(): void {
         this.loginForm=this.formBuilder.group({
           user:[''],
-          pass: ['']
+          pass: [''],
+          email: ['']
         });
     }
 
     login(){
       let user = this.loginForm.value.user;
       let pass = this.loginForm.value.pass;
-      this.auth.login(user, pass).subscribe({
+      let email = this.loginForm.value.email;
+      this.auth.login(user, pass, email).subscribe({
         next: data=>{
           localStorage.setItem('userData', JSON.stringify(data));
+          console.log(data);
         },
         error: err=>{
           console.log('Hiba a belépés során: ' + err);
