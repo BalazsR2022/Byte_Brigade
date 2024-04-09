@@ -1,16 +1,19 @@
 package com.geolidth.BackEnd.auth;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import lombok.Getter;
-import lombok.Setter;
-
-@Setter
-@Getter
 public class JwtAuthenticationResponse {
     private String token;
 
-    public JwtAuthenticationResponse(String token) {
+    public JwtAuthenticationResponse(@JsonProperty("token") String token) {
         this.token = token;
     }
 
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
+    }
 }

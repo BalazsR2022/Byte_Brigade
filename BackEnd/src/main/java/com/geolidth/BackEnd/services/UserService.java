@@ -1,6 +1,5 @@
 package com.geolidth.BackEnd.services;
 
-import com.geolidth.BackEnd.auth.UserCredentials;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewUser;
@@ -25,8 +24,6 @@ public interface UserService extends UserDetailsService {
 
     void deleteUser(Integer userId);
 
-    void updateUserData(Integer userId, NewUser userDetails);
-
     void deleteUserData(Integer userId);
 
     void reserveBook(Long bookId, Integer userId);
@@ -36,8 +33,6 @@ public interface UserService extends UserDetailsService {
     BookUser findUserById(Integer userId);
 
     List<BookUser> getAllUsers();
-
-    Book findBookById(Integer id);
 
     boolean existsByUsername(String username);
 

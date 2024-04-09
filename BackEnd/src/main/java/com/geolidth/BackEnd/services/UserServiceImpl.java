@@ -1,18 +1,10 @@
 package com.geolidth.BackEnd.services;
 
-import com.geolidth.BackEnd.auth.AuthenticationResult;
-import com.geolidth.BackEnd.auth.CustomAuthenticationManager;
-import com.geolidth.BackEnd.auth.UserCredentials;
-import com.geolidth.BackEnd.exceptions.NoSuchBookException;
 import com.geolidth.BackEnd.exceptions.NoSuchUserException;
-import com.geolidth.BackEnd.exceptions.WrongUsernameOrPasswordException;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewUser;
-import com.geolidth.BackEnd.repositories.BookRepository;
 import com.geolidth.BackEnd.repositories.BookUserRepository;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
@@ -24,13 +16,12 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final BookRepository bookRepository;
+
     private final BookUserRepository bookUserRepository;
 
 
-    public UserServiceImpl(BookRepository bookRepository,
-                           BookUserRepository bookUserRepository) {
-        this.bookRepository = bookRepository;
+    public UserServiceImpl(BookUserRepository bookUserRepository) {
+
         this.bookUserRepository = bookUserRepository;
     }
 
@@ -91,11 +82,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUserData(Integer userId, NewUser userDetails) {
-
-    }
-
-    @Override
     public BookUser findUserByUsername(String username) {
         return bookUserRepository.findByUsername(username)
                 .orElse(null);
@@ -111,11 +97,7 @@ public class UserServiceImpl implements UserService {
         return bookUserRepository.findAll();
     }
 
-    @Override
-    public Book findBookById(Integer id) {
-        return bookRepository.findById(id)
-                .orElseThrow(NoSuchBookException::new);
-    }
+
     @Override
     public boolean existsByUsername(String username) {
         return bookUserRepository.findByUsername(username).isPresent();

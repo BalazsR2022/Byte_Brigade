@@ -1,13 +1,13 @@
 package com.geolidth.BackEnd.Controllers;
 
-import com.geolidth.BackEnd.auth.UserCredentials;
+import com.geolidth.BackEnd.exceptions.ForbiddenActionException;
+import com.geolidth.BackEnd.exceptions.NoSuchBookException;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewUser;
-
+import com.geolidth.BackEnd.models.dto.UpdateBook;
 import com.geolidth.BackEnd.services.BookService;
 import com.geolidth.BackEnd.services.UserService;
-import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,86 +16,98 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
-import static org.springframework.http.HttpStatus.CREATED;
-import static org.springframework.http.HttpStatus.OK;
+import java.util.Objects;
 @CrossOrigin(origins = "http://localhost:4200")
 @RestController
-
-@RequestMapping("/users")
+@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+@RequestMapping("/api")
 public class UserController {
-
-
-
     private final UserService userService;
+    private final BookService bookService;
 
-    public UserController(UserService userService) {
-
+    public UserController(UserService userService, BookService bookService) {
         this.userService = userService;
+        this.bookService = bookService;
     }
+
     @GetMapping("/user/profile")
-    @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')") // Hozzáférés engedélyezése bejelentkezett felhasználóknak
     public ResponseEntity<?> getUserProfile() {
         UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String username = userDetails.getUsername();
         BookUser user = userService.findUserByUsername(username);
         return ResponseEntity.ok(user);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity<BookUser> getUserById(@PathVariable Integer id) {
-        return ResponseEntity.status(OK).body(userService.getById(id));
-    }
-
-
-
-
-    @PostMapping("/signup")
+    /*@PostMapping("/signup")
     public ResponseEntity<BookUser> signUp(@RequestBody NewUser newUserRequest) {
         BookUser savedUser = userService.save(new BookUser(newUserRequest));
         return ResponseEntity.status(CREATED).body(savedUser);
-    }
+    }*/
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PostMapping("/admin/book")
+    @PostMapping("/users/book")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.addBook(book));
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @PutMapping("/admin/{userId}")
+    @PutMapping("/users/{userId}")
     public ResponseEntity<BookUser> updateUser(@PathVariable Integer userId,
                                                @RequestBody NewUser userDetails) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        BookUser currentUser = (BookUser) authentication.getPrincipal();
+        if (!Objects.equals(currentUser.getId(), userId)) {
+            throw new ForbiddenActionException("Nincs jogosultsága a felhasználó módosításához");
+        }
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.updateUser(userId, userDetails));
     }
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
-    @DeleteMapping("/admin/{userId}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Integer userId) {
-        userService.deleteUser(userId);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+    @PutMapping("/books/{bookId}")
+    public ResponseEntity<Book> updateBook(@PathVariable Integer bookId, @RequestBody UpdateBook updateBook) {
+        UserDetails currentUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String currentUsername = currentUser.getUsername();
+
+        try {
+            Book book = bookService.getById(bookId);
+            if (!book.getOwner().getUsername().equals(currentUsername)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+            Book updatedBook = bookService.updateBook(bookId, updateBook);
+            return ResponseEntity.ok(updatedBook);
+        } catch (NoSuchBookException | ForbiddenActionException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @PutMapping("/{userId}")
-    public ResponseEntity<BookUser> updateUserData(@PathVariable Integer userId,
-                                                   @RequestBody NewUser userDetails) {
-        userService.updateUserData(userId, userDetails);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
-
-    @PreAuthorize("hasRole('ROLE_USER')")
-    @DeleteMapping("/{userId}")
+    @DeleteMapping("/users/{userId}")
     public ResponseEntity<Void> deleteUserData(@PathVariable Integer userId) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        BookUser currentUser = (BookUser) authentication.getPrincipal();
+        if (!Objects.equals(currentUser.getId(), userId)) {
+            throw new ForbiddenActionException("Nincs jogosultsága a felhasználó törléséhez");
+        }
         userService.deleteUserData(userId);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
+    @DeleteMapping("/books/{bookId}")
+    public ResponseEntity<Void> deleteBook(@PathVariable Integer bookId) {
+        UserDetails currentUser = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String currentUsername = currentUser.getUsername();
 
-    @PreAuthorize("hasRole('ROLE_USER')")
+        try {
+            Book book = bookService.getById(bookId);
+            if (!book.getOwner().getUsername().equals(currentUsername)) {
+                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+            }
+            bookService.deleteBook(bookId);
+            return ResponseEntity.noContent().build();
+        } catch (NoSuchBookException e) {
+            return ResponseEntity.notFound().build();
+        } catch (ForbiddenActionException e) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        }
+    }
     @PostMapping("/reserve/{bookId}")
     public ResponseEntity<Void> reserveBook(@PathVariable Long bookId,
-                                            Authentication authentication) {
+            Authentication authentication) {
         userService.reserveBook(bookId, ((BookUser) authentication.getPrincipal()).getId());
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }

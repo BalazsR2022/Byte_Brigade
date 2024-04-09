@@ -14,6 +14,9 @@ public interface BookService {
     List<Book> getBooks();
     List<Book> getBooks(Optional<String> q);
     List<Book> searchBooks(String query);
+    List<Book> searchBooksByTitle(String title);
+    List<Book> searchBooksByAuthor(String author);
+    List<Book> searchBooksByTitleAndAuthor(String title, String author);
     Book getById(int id)
             throws NoSuchBookException;
     Book save(NewBook newBook)

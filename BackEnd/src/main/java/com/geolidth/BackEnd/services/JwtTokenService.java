@@ -6,6 +6,7 @@ import io.jsonwebtoken.JwtParser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -17,11 +18,13 @@ import java.util.Date;
 
 @Service
 public class JwtTokenService implements TokenService {
-    @Value("${jwt.secret}")
+    @Value("${token.jwt.secret}")
     private String jwtSecret;
 
     @Value("${jwt.expiration}")
     private int jwtExpirationMs;
+
+
 
     public String generateToken(Authentication authentication) {
         BookUser user = (BookUser) authentication.getPrincipal();
@@ -38,7 +41,8 @@ public class JwtTokenService implements TokenService {
 
     @Override
     public String generateToken(UserDetails user) {
-        return null;
+        Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        return generateToken(authentication);
     }
 
     @Override
@@ -65,4 +69,5 @@ public class JwtTokenService implements TokenService {
         byte[] keyBytes = jwtSecret.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyBytes);
     }
+
 }

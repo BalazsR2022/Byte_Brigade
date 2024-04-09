@@ -34,7 +34,7 @@ public class Book {
     private Boolean reserved;
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
-    @JsonProperty("ownerId")
+    @JsonProperty("owner_Id")
     private BookUser owner;
 
     public Book(Integer id, String title, String author, String publisher, String category, String county, String quality, Integer year) {

@@ -62,7 +62,7 @@ public Book save(NewBook newBook) throws NoSuchUserException {
         Optional<Book> bookOptional = bookRepository.findById(bookId);
         if (bookOptional.isPresent()) {
             if (!bookOptional.get().getOwner().getId().equals(user.getId())) {
-                throw new ForbiddenActionException();
+                throw new ForbiddenActionException("Nincs jogosultsága a könyv adatainak frissítéséhez");
             }
             Book book = bookOptional.get();
             if (updateBook.getTitle() != null && !updateBook.getTitle().isBlank()) {
@@ -93,15 +93,14 @@ public Book save(NewBook newBook) throws NoSuchUserException {
         }
     }
 
-    public void deleteBook(Integer bookId)
-            throws NoSuchUserException, NoSuchBookException, ForbiddenActionException {
+    public void deleteBook(Integer bookId) throws NoSuchUserException, NoSuchBookException, ForbiddenActionException {
         BookUser user = userService.getById(bookId);
         Optional<Book> book = bookRepository.findById(bookId);
         if (book.isPresent()) {
             if (book.get().getOwner().getId().equals(user.getId())) {
                 bookRepository.deleteById(bookId);
             } else {
-                throw new ForbiddenActionException();
+                throw new ForbiddenActionException("Nincs jogosultsága a könyv törléséhez");
             }
         } else {
             throw new NoSuchBookException();
@@ -154,6 +153,83 @@ public Book save(NewBook newBook) throws NoSuchUserException {
 
         return filteredBooks;
     }
+    @Override
+    public List<Book> searchBooksByTitleAndAuthor(String title, String author) throws NoSuchBookException {
+        if (title == null && author == null) {
+            return Collections.emptyList();
+        }
+
+        List<Book> allBooks = getBooks();
+
+        List<Book> filteredBooks = new ArrayList<>();
+        for (Book book : allBooks) {
+            boolean titleMatch = false;
+            boolean authorMatch = false;
+
+            if (title != null && book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                titleMatch = true;
+            }
+
+            if (author != null && book.getAuthor().toLowerCase().contains(author.toLowerCase())) {
+                authorMatch = true;
+            }
+
+            if (titleMatch || authorMatch) {
+                filteredBooks.add(book);
+            }
+        }
+
+        if (filteredBooks.isEmpty()) {
+            throw new NoSuchBookException();
+        }
+
+        return filteredBooks;
+    }
+
+    @Override
+    public List<Book> searchBooksByTitle(String title) throws NoSuchBookException {
+        if (title == null) {
+            return Collections.emptyList();
+        }
+
+        List<Book> allBooks = getBooks();
+
+        List<Book> filteredBooks = new ArrayList<>();
+        for (Book book : allBooks) {
+            if (book.getTitle().toLowerCase().contains(title.toLowerCase())) {
+                filteredBooks.add(book);
+            }
+        }
+
+        if (filteredBooks.isEmpty()) {
+            throw new NoSuchBookException();
+        }
+
+        return filteredBooks;
+    }
+
+    @Override
+    public List<Book> searchBooksByAuthor(String author) throws NoSuchBookException {
+        if (author == null) {
+            return Collections.emptyList();
+        }
+
+        List<Book> allBooks = getBooks();
+
+        List<Book> filteredBooks = new ArrayList<>();
+        for (Book book : allBooks) {
+            if (book.getAuthor().toLowerCase().contains(author.toLowerCase())) {
+                filteredBooks.add(book);
+            }
+        }
+
+        if (filteredBooks.isEmpty()) {
+            throw new NoSuchBookException();
+        }
+
+        return filteredBooks;
+    }
+
     private boolean bookContainsQuery(Book book, String query) {
         return book.getTitle().toLowerCase().contains(query.toLowerCase()) ||
                 book.getAuthor().toLowerCase().contains(query.toLowerCase()) ||

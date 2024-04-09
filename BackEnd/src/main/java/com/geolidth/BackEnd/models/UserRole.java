@@ -12,20 +12,20 @@ import javax.persistence.*;
 public class UserRole {
 
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
     @Enumerated(EnumType.STRING)
+    @Column(name = "name")
+    private Role name;
+
     @Column(name = "role")
-    private Role role;
+    private String role;
 
     public enum Role {
         ADMIN_ROLE,
         USER_ROLE,
         GUEST_ROLE
     }
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
-
-    @Column(name = "name")
-    private String name;
-
 }

@@ -2,9 +2,14 @@ package com.geolidth.BackEnd.exceptions;
 
 public class ForbiddenActionException extends RuntimeException {
 
-    public static final  String MESSAGE = "Nana!!! Ilyet nem szabad csinálni!";
+    private final String message;
 
-    public ForbiddenActionException() {
-        super(MESSAGE);
+    public ForbiddenActionException(String message) {
+        this.message = message;
+    }
+
+    @Override
+    public String getMessage() {
+        return message;
     }
 }
