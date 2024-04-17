@@ -1,5 +1,5 @@
 
-<section>
+<section class="section">
     <form [formGroup]="loginForm" (submit)="login()" class="box columns is-mobile is-centered is-vcentered is-multiline m-6 has-background-success">
         <div class="field column is-half">
             <label for="userEmail" class="label">Felhasználónév</label>
@@ -14,7 +14,8 @@
             <input type="email" id="email" class="input has-background-success-light" formControlName="email" required>
         </div>
         <div class="column is-centered">
-            <button type="submit" class="button is-fullwidth is-rounded is-responsive is-info">Mehet</button>
+            <button type="submit" class="button is-fullwidth is-rounded is-responsive is-info" routerLink="/mysite" routerLinkActive="active">Mehet</button>
         </div>
+
     </form>
 </section>

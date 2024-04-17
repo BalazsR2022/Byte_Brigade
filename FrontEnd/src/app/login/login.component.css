@@ -1,0 +1,12 @@
+.section{
+    background:url('src/assets/fig2.png')no-repeat center center fixed; 
+    margin:0px;
+    min-width: 100%;
+    background-position: center;
+    background-size: cover;
+    -webkit-background-size:cover;
+    -o-background-size:cover;
+    -moz-background-size:cover;
+    background-size:cover;
+    min-height: 90vh;
+}
