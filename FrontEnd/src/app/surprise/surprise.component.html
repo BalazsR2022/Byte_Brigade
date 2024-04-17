@@ -1,17 +1,19 @@
-<section class="section columns">
-    <div class="column is-one-third"></div>
-   <div class="column is-centered is-one-third">
+<body class="body">
+    <section class="section columns is centered">
+        <section class="section columns">
+            <div class="column is-one-third"></div>
+                <div class="column has-centered is-one-third">
         
-          <h1 class = "has-text-centered">Igazi meglepetés vár rád, ha megnyomod a lenti gombot!</h1>
+                    <h1 class = "has-text-centered">Igazi meglepetés vár rád, ha megnyomod a lenti gombot!</h1>
           
-        <div class="field image">
-            <figure class="is-4by3">
-          <img src="assets/zsakbamackokep.jpg" alt="Placeholder image" class="image" *ngIf="!clicked">
-          </figure>
+                        <div class="field image has-text-centered">
+                            <figure class="is-4by3">
+                            <img src="assets/zsakbamackokep.jpg" alt="Placeholder image" class="image" *ngIf="!clicked">
+                            </figure>
 
-          <div class="field m-3" *ngIf="clicked">
-            <div class="card has-background-grey-lighter is-mobile">
-                <div class="card-image">
+                    <div class="field m-3" *ngIf="clicked">
+                        <div class="card has-background-grey-lighter is-mobile">
+                    <div class="card-image">
                     <figure class=" is-64x64">
                         <img src="../assets/{{this.image}}.png" alt="Placeholder image" class="image">
                     </figure>
@@ -52,3 +54,4 @@
   </div>
   
 </section>
+    </section>

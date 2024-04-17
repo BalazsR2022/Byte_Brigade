@@ -1,12 +1,10 @@
 <section class="section">
     <form [formGroup]="userForm" (ngSubmit)="saveUserData()">
-        <div *ngIf="userForm.get('name').errors?.required" class="columns"><h2 class="has-text-warning has-background-primary column is-centered">Kérem írja be a nevét!</h2></div>
-        <div *ngIf="userForm.get('email').errors?.email" class="columns"><h2 class="has-text-warning has-background-primary column is-centered">Rossz emailcím!</h2></div>
-        <div *ngIf="userForm.get('email').errors?.required" class="columns"><h2 class="has-text-warning has-background-primary column is-centered">Rossz emailcím!</h2></div>
-        <div *ngIf="userForm.get('password').errors?.required" class="columns"><h2 class="has-text-warning has-background-primary column is-centered">A jelszó legalább 8 karakter legyen!</h2></div>
-        <div *ngIf="userForm.get('password').errors?.minlength" class="columns"><h2 class="has-text-warning has-background-primary column is-centered">A jelszó legalább 8 karakter legyen!</h2></div>
-        <input type="text" placeholder="Név" class="input mt-2 is-info is-large is-rounded has-text-info-dark"
-            formControlName="name" required>
+        <div *ngIf="userForm.get('name').errors?.required" class="columns"><h2 class="  has-background-primary column is-centered has-border-radius">Regisztrálj az adataid megadásával!</h2></div>
+
+              <input type="text" placeholder="Név" class="input mt-2 is-info is-large is-rounded has-text-info-dark"
+              formControlName="name" required>
+      
         <input type="email" placeholder="Emailcím (example@example.example)" class="input mt-2 is-info is-large is-rounded has-text-info-dark"
             formControlName="email" required>
         <input type="password" placeholder="Jelszó (legalább 8 karakter)" class="input mt-2 is-info is-large is-rounded has-text-info-dark"
@@ -40,7 +38,7 @@
                 </div>
             </div>
             <div class="column">
-                <button type="submit" class="button is-large is-info is-rounded mt-2"
+                <button type="submit" class="button is-large is-info is-rounded mt-2 custom button"
                     [disabled]="!userForm.valid">Mehet</button>
             </div>
         </div>
