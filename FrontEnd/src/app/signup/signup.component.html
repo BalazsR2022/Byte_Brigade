@@ -1,6 +1,6 @@
 <section class="section">
-    <form [formGroup]="userForm" (ngSubmit)="saveUserData()">
-        <div *ngIf="userForm.get('name').errors?.required" class="columns"><h2 class="  has-background-primary column is-centered has-border-radius">Regisztrálj az adataid megadásával!</h2></div>
+    <form [formGroup]="userForm" (ngSubmit)="saveUserData()"> <!--*ngIf="userForm.get('name').errors?.required"-->
+        <div  class="columns"><h2 class="  has-background-primary column is-centered has-border-radius">Regisztrálj az adataid megadásával!</h2></div>
 
               <input type="text" placeholder="Név" class="input mt-2 is-info is-large is-rounded has-text-info-dark"
               formControlName="name" required>
@@ -37,10 +37,11 @@
                     </select>
                 </div>
             </div>
+
             <div class="column">
-                <button type="submit" class="button is-large is-info is-rounded mt-2 custom button"
-                    [disabled]="!userForm.valid">Mehet</button>
+                <button type="button" class="button is-large is-info is-rounded mt-2 custom button" routerLink="/mysite" routerLinkActive="active">Mehet</button>
             </div>
+
         </div>
     </form>
 </section>

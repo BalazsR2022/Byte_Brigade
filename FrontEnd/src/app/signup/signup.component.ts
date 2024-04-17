@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -7,22 +7,23 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent {
-  userForm: any;
-  userFormValid:boolean=true;
-  constructor(){
+  userForm!: FormGroup;
+  userFormValid: boolean = true;
+
+  constructor(private elRef: ElementRef) {
     this.initUserForm();
   }
-  
-  saveUserData(){
-    if(this.userForm.valid){
+
+  saveUserData() {
+    if (this.userForm.valid) {
       console.log(this.userForm);
       this.initUserForm();
-    }else{
-      this.userFormValid=false;
+    } else {
+      this.userFormValid = false;
     }
   }
 
-  initUserForm(){
+  initUserForm() {
     this.userForm = new FormGroup({
       name: new FormControl('', Validators.required),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -31,4 +32,10 @@ export class SignupComponent {
     });
   }
 
+  jumpToElement() {
+    const element = this.elRef.nativeElement.querySelector('#mysite');
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  }
 }
