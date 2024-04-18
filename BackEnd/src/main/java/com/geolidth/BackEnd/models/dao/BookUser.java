@@ -48,8 +48,6 @@ public class BookUser implements UserDetails {
     @Column(name = "is_admin")
     private boolean isAdmin;
 
-    private boolean loggedIn;
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<GrantedAuthority> authorities = new ArrayList<>();
