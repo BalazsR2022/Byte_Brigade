@@ -16,4 +16,5 @@ public class NewBook {
     private String county;
     public String quality;
     public Integer year;
+    public String picture;
 }

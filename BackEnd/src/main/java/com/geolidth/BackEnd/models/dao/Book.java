@@ -36,8 +36,9 @@ public class Book {
     @JsonIdentityReference(alwaysAsId = true)
     @JsonProperty("owner_Id")
     private BookUser owner;
+    private String picture;
 
-    public Book(Integer id, String title, String author, String publisher, String category, String county, String quality, Integer year) {
+    public Book(Integer id, String title, String author, String publisher, String category, String county, String quality, Integer year, String picture) {
         this.id = id;
         this.title = title;
         this.author = author;
@@ -46,6 +47,7 @@ public class Book {
         this.county = county;
         this.quality = quality;
         this.year = year;
+        this.picture = picture;
     }
 }
 

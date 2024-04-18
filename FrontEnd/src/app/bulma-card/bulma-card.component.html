@@ -2,10 +2,11 @@
     <div *ngIf="jsonData">
         <div class="columns prodList is-multiline is-variable">
             <div class="column konyvecske is-one-third" *ngFor="let book of jsonData">
+                
                 <div class="card has-background-grey-lighter">
                     <div class="card-image">
                         <figure class="is-4by3">
-                            <img src="../assets/{{book.category}}.png" alt="Placeholder image" class="image">
+                            <img src="../assets/{{book.picture}}" alt="Placeholder image" class="image">
                         </figure>
                     </div>
                     <div class="card-content">
@@ -29,7 +30,7 @@
                             </div>
                         </div>
                         <div class="level">
-                            <div class="level-left level-item"><button class="button is-info gomb">Foglal</button></div>
+                            <div class="level-left level-item"><button (onclick)="reservedBook(book.id);" class="button is-info gomb">Foglal</button></div>
                             <div class="level-right level-item subtitle">{{book.year}}</div>
                         </div>
                     </div>

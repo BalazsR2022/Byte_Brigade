@@ -3,6 +3,7 @@ import { JsonReaderService } from '../json-reader.service';
 import { BaseService } from '../base.service';
 
 
+
 @Component({
   selector: 'app-bulma-card',
   templateUrl: './bulma-card.component.html',
@@ -32,6 +33,8 @@ export class BulmaCardComponent implements OnInit {
         this.emptyData=true;
       }
     });
-
-  }
+}
+reservedBook(bookId:number){
+  alert("foglalás: "+bookId);
+}
 }

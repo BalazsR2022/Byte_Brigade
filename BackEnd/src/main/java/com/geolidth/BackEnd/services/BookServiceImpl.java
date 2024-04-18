@@ -116,7 +116,8 @@ public Book save(NewBook newBook) throws NoSuchUserException {
                 newBook.getCategory(),
                 newBook.getCounty(),
                 newBook.getQuality(),
-                newBook.getYear());
+                newBook.getYear(),
+                newBook.getPicture());
         book.setOwner(user);
         return book;
     }

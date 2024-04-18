@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS books (
     year INT(6),
     reserved BOOLEAN,
     owner_id INT,
+    picture VARCHAR(10) DEFAULT '1.png',
     FOREIGN KEY (owner_id) REFERENCES bookusers(id)
 );
 
