@@ -1,3 +1,4 @@
+import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { JsonReaderService } from '../json-reader.service';
 import { BaseService } from '../base.service';
@@ -27,6 +28,7 @@ export class BulmaCardComponent implements OnInit {
       next: (res)=>{
         this.jsonData=res;
         this.emptyData=false;
+        
       },
       error: (err)=>{
         console.log('Hiba az oldalon: ' + err);
@@ -35,6 +37,6 @@ export class BulmaCardComponent implements OnInit {
     });
 }
 reservedBook(bookId:number){
-  alert("foglalás: "+bookId);
+  console.log("foglalás: "+bookId);
 }
 }

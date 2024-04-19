@@ -13,6 +13,7 @@ import { UserComponent } from './user/user.component';
 import { ThisBookComponent } from './this-book/this-book.component';
 import { flush } from '@angular/core/testing';
 import { MysiteComponent } from './mysite/mysite.component';
+import { BooksAdminComponent } from './books-admin/books-admin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -20,13 +21,14 @@ const routes: Routes = [
   { path:'service', component:ServiceComponent, pathMatch:'full'},
   { path:'contact', component:ContactComponent, pathMatch:'full' },
   { path:'about', component:AboutComponent, pathMatch:'full' },
-  { path:'signup', component:SignupComponent, pathMatch:'full' },
+  { path:'signup', component:UserComponent, pathMatch:'full' },
   { path:'login', component:LoginComponent, pathMatch:'full' },
   { path:'surprise', component:SurpriseComponent, pathMatch:'full' },
   { path:'redbutton', component:RedbuttonComponent, pathMatch:'full' },
   { path:'users', component:UserComponent, pathMatch:'full' },
   { path:'thisbook', component:ThisBookComponent, pathMatch:'full' },
   { path:'mysite', component:MysiteComponent, pathMatch:'full' },
+  { path:'booksadmin', component:BooksAdminComponent, pathMatch:'full' },
 ];
 
 @NgModule({

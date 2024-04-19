@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { BaseService } from '../base.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +11,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class LoginComponent implements OnInit{
     loginForm !: FormGroup;
-    constructor(private auth:AuthService, private formBuilder: FormBuilder){}
+    loginUser:any={}
+    users:any=[]
+    constructor(private auth:AuthService, private formBuilder: FormBuilder, private base:BaseService, private router:Router) {
+      this.base.getUsers().subscribe(res=>this.users=res)
+
+    }
 
     ngOnInit(): void {
         this.loginForm=this.formBuilder.group({
@@ -20,19 +27,29 @@ export class LoginComponent implements OnInit{
     }
 
     login(){
-      let user = this.loginForm.value.user;
-      let pass = this.loginForm.value.pass;
-      let email = this.loginForm.value.email;
-      this.auth.login(user, pass, email).subscribe({
-        next: data=>{
-          localStorage.setItem('userData', JSON.stringify(data));
-          console.log(data);
-        },
-        error: err=>{
-          console.log('Hiba a belépés során: ' + err);
-        }
-      });
-      this.loginForm.reset();
-      this.loginForm.patchValue({user:"Hibás adatok!"});
+      this.users=this.users.filter(
+        (res:any)=> {return (res.email==this.loginUser.email && res.password==this.loginUser.password)}
+      )
+
+      if (this.users){
+        this.router.navigate(['/home'])
+      }
+      else{
+        // Sikertellen belépés
+      }
+
+      // let user = this.loginForm.value.user;
+      // let pass = this.loginForm.value.pass;
+      // let email = this.loginForm.value.email;
+      // this.auth.login(user, pass, email).subscribe({
+      //   next: data=>{
+      //     localStorage.setItem('userData', JSON.stringify(data));
+      //     console.log(data);
+      //   },
+      //   error: err=>{
+      //     console.log('Hiba a belépés során: ' + err);
+      //   }
+      // });
+  
     }
 }

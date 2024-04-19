@@ -15,6 +15,7 @@ export class SignupComponent {
   }
 
   saveUserData() {
+    console.log(this.userForm);
     if (this.userForm.valid) {
       console.log(this.userForm);
       this.initUserForm();

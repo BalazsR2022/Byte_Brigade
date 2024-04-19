@@ -6,20 +6,23 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
+url =  'http://172.16.16.136:5091/api/Books/'
+userUrl =  'http://172.16.16.136:5091/api/Users/'
 private host="http://localhost:8080/";
 private bookSubject = new Subject();
 private userSubject = new Subject();
   constructor(private http : HttpClient) {
+    this.http=http;
     this.loadBooks();
-    this.getBooks();
+    // this.getBooks();
     this.loadUsers();
     this.getUsers();
    }
 
    loadBooks(){
-    let endpoint = "guest/books";
-    let url=this.host+endpoint;
-    return this.http.get(url).subscribe({
+    // let endpoint = "url";
+    // let url=this.host+endpoint;
+    return this.http.get(this.url).subscribe({
       next:(data)=>this.bookSubject.next(data),
       error:(err)=>console.log("Hiba a könyvek lekérésekor: ", err)
     });
@@ -44,9 +47,9 @@ private userSubject = new Subject();
    }
 
    postBook(body:any){
-    let endpoint = "guest/books";
-    let url=this.host+endpoint;
-    const result = this.http.post(url,body);
+    // let endpoint = "guest/books";
+    // let url=this.host+endpoint;
+    const result = this.http.post(this.url,body);
     return result;
    }
 
@@ -65,9 +68,9 @@ private userSubject = new Subject();
    }
 
    loadUsers(){
-    let endpoint = "users";
-    let url=this.host+endpoint;
-    return this.http.get(url).subscribe({
+    // let endpoint = "users";
+    // let url=this.host+endpoint;
+    return this.http.get(this.userUrl).subscribe({
       next:(data)=>this.userSubject.next(data),
       error:(err)=>console.log("Hiba a felhasználók lekérésekor: ", err)
     });
@@ -77,7 +80,8 @@ private userSubject = new Subject();
     let endpoint = "users";
     let url=this.host+endpoint;
     return this.http.get(url+"/"+id).subscribe({
-      next:(data)=>this.bookSubject.next(data),
+      //next:(data)=>this.bookSubject.next(data),
+      next:(data)=>this.userSubject.next(data),
       error:(err)=>console.log("Hiba a kijelölt felhasználó lekérésekor: ", err)
     });
    }
@@ -91,16 +95,17 @@ private userSubject = new Subject();
    }
 
    postUser(body:any){
-    let endpoint = "users";
-    let url=this.host+endpoint;
-    const result = this.http.post(url,body);
+    // let endpoint = "users";
+    // let url=this.host+endpoint;
+    const result = this.http.post(this.userUrl,body);
     return result;
    }
 
    updateUser(id:number, body:any){
-    let endpoint = "users/";
-    let url=this.host+endpoint+id;
-    const result = this.http.put(url,body);
+    // let endpoint = "users/";
+    // let url=this.host+endpoint+id;
+    console.log("userup",body,id)
+    const result = this.http.put(this.userUrl,body);
     return result;
    }
 

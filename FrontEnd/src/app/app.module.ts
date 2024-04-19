@@ -20,6 +20,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { ThisBookComponent } from './this-book/this-book.component';
 import { MysiteComponent } from './mysite/mysite.component';
+import { BooksAdminComponent } from './books-admin/books-admin.component';
 
 
 @NgModule({
@@ -39,6 +40,7 @@ import { MysiteComponent } from './mysite/mysite.component';
     LoginComponent,
     ThisBookComponent,
     MysiteComponent,
+    BooksAdminComponent,
     
 
   ],
