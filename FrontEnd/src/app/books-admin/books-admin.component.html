@@ -1,20 +1,22 @@
 {{books|json}}
-
-<div class="row">
-    <div *ngFor="let o of oszlopok" class="col">
-        {{o.text}}
+<div class="container mt-2">
+    
+    <div class="row">
+        <div *ngFor="let o of oszlopok" class="col">
+            {{o.text}}
+        </div>
+        <div class="col">
+            Actions
+        </div>
     </div>
-    <div class="col">
-        Actions
-    </div>
-</div>
-
-<div  class="row">
-    <div *ngFor="let o of oszlopok" class="col">    
-            <input *ngIf="o.type!='plain'" [(ngModel)]="newBook[o.key]" [type]="o.type" class="form-control" >       
-    </div>
-    <div class="col">
-        <button  (click)="createBook()" type="button" class="btn btn-primary">Add</button>
+    
+    <div  class="row">
+        <div *ngFor="let o of oszlopok" class="col">
+                <input *ngIf="o.type!='plain'" [(ngModel)]="newBook[o.key]" [type]="o.type" class="form-control" >
+        </div>
+        <div class="col">
+            <button  (click)="createBook()" type="button" class="btn btn-primary">Add</button>
+        </div>
     </div>
 </div>
 

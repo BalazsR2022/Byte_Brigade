@@ -70,7 +70,7 @@ public class AuthController {
         newUser.setEmail(newUserRequest.getEmail());
         newUser.setRole(UserRole.Role.USER_ROLE);
 
-        if (username.equals("Csajbók-Reményi László") || username.equals("Balász Réka") || username.equals("Gerecs Diána")) {
+        if (username.equals("Csajbók-Reményi László") || username.equals("Balázs Réka") || username.equals("Gerecs Diána")) {
             newUser.setRole(UserRole.Role.ADMIN_ROLE);
         }
         userService.save(newUser);

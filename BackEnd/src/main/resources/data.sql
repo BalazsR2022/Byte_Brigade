@@ -2,6 +2,15 @@ CREATE DATABASE IF NOT EXISTS bookdb CHARACTER SET utf8mb4 COLLATE utf8mb4_unico
 
 USE bookdb;
 
+CREATE TABLE IF NOT EXISTS bookusers (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50),
+    password VARCHAR(100),
+    email VARCHAR(100),
+    role ENUM('ADMIN_ROLE', 'USER_ROLE') NOT NULL,
+    is_admin BOOLEAN
+);
+
 CREATE TABLE IF NOT EXISTS books (
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(100),
@@ -17,14 +26,7 @@ CREATE TABLE IF NOT EXISTS books (
     FOREIGN KEY (owner_id) REFERENCES bookusers(id)
 );
 
-CREATE TABLE IF NOT EXISTS bookusers (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50),
-    password VARCHAR(100),
-    email VARCHAR(100),
-    role ENUM('ADMIN_ROLE', 'USER_ROLE') NOT NULL,
-    is_admin BOOLEAN
-);
+
 
 CREATE TABLE IF NOT EXISTS user_roles (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -32,6 +34,28 @@ CREATE TABLE IF NOT EXISTS user_roles (
     role ENUM('ADMIN_ROLE', 'USER_ROLE') NOT NULL,
     FOREIGN KEY (user_id) REFERENCES bookusers(id)
 );
+
+INSERT INTO `bookusers` (`username`, `password`, `email`, `is_admin`, `role`) VALUES
+('Csajbók-Reményi László', 'password', 'Laci@gmail.com', b'1', 'ADMIN_ROLE'),
+('Balázs Réka', 'password', 'Reka@gmail.com', b'1', 'ADMIN_ROLE'),
+('Gerecs Diána', 'password', 'gerecsdiana@gmail.com', b'1', 'ADMIN_ROLE'),
+('Kovács Ádám', '', NULL, b'0', 'USER_ROLE'),
+('Nagy Petra', '', NULL, b'0', 'USER_ROLE'),
+('Szabó Gábor', '', NULL, b'0', 'USER_ROLE'),
+('Horváth Anna', '', NULL, b'0', 'USER_ROLE'),
+('Tóth Péter', '', NULL, b'0', 'USER_ROLE'),
+('Kiss Katalin', '', NULL, b'0', 'USER_ROLE'),
+('Molnár Márk', '', NULL, b'0', 'USER_ROLE'),
+('Kovács Zsófia', '', NULL, b'0', 'USER_ROLE'),
+('Papp Bence', '', NULL, b'0', 'USER_ROLE'),
+('Varga Eszter', '', NULL, b'0', 'USER_ROLE'),
+('Lakatos Levente', '', NULL, b'0', 'USER_ROLE'),
+('Balogh Dóra', '', NULL, b'0', 'USER_ROLE'),
+('Takács Balázs', '', NULL, b'0', 'USER_ROLE'),
+('Fekete Viktória', '', NULL, b'0', 'USER_ROLE'),
+('Szűcs Máté', '', NULL, b'0', 'USER_ROLE'),
+('Varga Kíra', '', NULL, b'0', 'USER_ROLE'),
+('Bálint Richárd', '', NULL, b'0', 'USER_ROLE');
 
 INSERT INTO `books` (`owner_id`, `year`, `category`, `author`, `county`, `publisher`, `quality`, `title`, `reserved`, `picture`) VALUES
 (6, 1955, 'fantasy', 'J.R.R. Tolkien', 'Heves ', 'Allen & Unwin', 'használt', 'A gyűrűk ura', NULL, '1.png'),
@@ -58,24 +82,4 @@ INSERT INTO `books` (`owner_id`, `year`, `category`, `author`, `county`, `publis
 (5, 2001, 'sport', 'Kassai Lajos', 'Nógrád', 'Dee-sign', 'használt', 'Lovasíjászat', NULL, '1.png'),
 (9, 2002, 'szépirodalom', 'Christopher Moore ', 'Tolna', 'Agave', 'újszerű', 'Biff Evangéliuma', NULL, '1.png');
 
-INSERT INTO `bookusers` (`username`, `password`, `email`, `is_admin`, `role`) VALUES
-('Csajbók-Reményi László', 'password', 'Laci@gmail.com', b'1', 'ADMIN_ROLE'),
-('Balázs Réka', 'password', 'Reka@gmail.com', b'1', 'ADMIN_ROLE'),
-('Gerecs Diána', 'password', 'gerecsdiana@gmail.com', b'1', 'ADMIN_ROLE'),
-('Kovács Ádám', '', NULL, b'0', 'USER_ROLE'),
-('Nagy Petra', '', NULL, b'0', 'USER_ROLE'),
-('Szabó Gábor', '', NULL, b'0', 'USER_ROLE'),
-('Horváth Anna', '', NULL, b'0', 'USER_ROLE'),
-('Tóth Péter', '', NULL, b'0', 'USER_ROLE'),
-('Kiss Katalin', '', NULL, b'0', 'USER_ROLE'),
-('Molnár Márk', '', NULL, b'0', 'USER_ROLE'),
-('Kovács Zsófia', '', NULL, b'0', 'USER_ROLE'),
-('Papp Bence', '', NULL, b'0', 'USER_ROLE'),
-('Varga Eszter', '', NULL, b'0', 'USER_ROLE'),
-('Lakatos Levente', '', NULL, b'0', 'USER_ROLE'),
-('Balogh Dóra', '', NULL, b'0', 'USER_ROLE'),
-('Takács Balázs', '', NULL, b'0', 'USER_ROLE'),
-('Fekete Viktória', '', NULL, b'0', 'USER_ROLE'),
-('Szűcs Máté', '', NULL, b'0', 'USER_ROLE'),
-('Varga Kíra', '', NULL, b'0', 'USER_ROLE'),
-('Bálint Richárd', '', NULL, b'0', 'USER_ROLE');
+

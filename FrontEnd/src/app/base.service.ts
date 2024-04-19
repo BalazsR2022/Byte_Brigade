@@ -20,9 +20,9 @@ private userSubject = new Subject();
    }
 
    loadBooks(){
-    // let endpoint = "url";
-    // let url=this.host+endpoint;
-    return this.http.get(this.url).subscribe({
+    let endpoint = "guest/books";
+    let url=this.host+endpoint;
+    return this.http.get(url).subscribe({
       next:(data)=>this.bookSubject.next(data),
       error:(err)=>console.log("Hiba a könyvek lekérésekor: ", err)
     });
