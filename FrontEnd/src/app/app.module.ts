@@ -21,6 +21,7 @@ import { LoginComponent } from './login/login.component';
 import { ThisBookComponent } from './this-book/this-book.component';
 import { MysiteComponent } from './mysite/mysite.component';
 import { BooksAdminComponent } from './books-admin/books-admin.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { BooksAdminComponent } from './books-admin/books-admin.component';
     HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
