@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Collections;
 import java.util.List;
-//@CrossOrigin(origins = "http://localhost:4200")
-@CrossOrigin(origins = "*", allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @RequestMapping("/guest")
 public class GuestController {

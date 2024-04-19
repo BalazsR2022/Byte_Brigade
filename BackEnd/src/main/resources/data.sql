@@ -10,10 +10,10 @@ CREATE TABLE IF NOT EXISTS books (
     category VARCHAR(30),
     county VARCHAR(50),
     quality VARCHAR(50),
+    picture VARCHAR(10),
     year INT(6),
     reserved BOOLEAN,
     owner_id INT,
-    picture VARCHAR(10) DEFAULT '1.png',
     FOREIGN KEY (owner_id) REFERENCES bookusers(id)
 );
 
@@ -33,30 +33,30 @@ CREATE TABLE IF NOT EXISTS user_roles (
     FOREIGN KEY (user_id) REFERENCES bookusers(id)
 );
 
-INSERT INTO `books` (`owner_id`, `year`, `category`, `author`, `county`, `publisher`, `quality`, `title`, `reserved`) VALUES
-(6, 1955, 'fantasy', 'J.R.R. Tolkien', 'Heves ', 'Allen & Unwin', 'használt', 'A gyűrűk ura', NULL),
-(9, 1997, 'ifúsági', 'J.K. Rowling', 'Vas', 'Bloomsbury', 'használt', 'Harry Potter és a bölcsk köve', NULL),
-(1, 1988, 'ismeretterjesztő', 'Stephen Hawking', 'Pest', 'Bantam Books', 'újszerű', 'Az idő rövid története', NULL),
-(8, 2005, 'fantasy', 'Rick Riordan', 'Somogy', 'Könyvmolyképző', 'használt', 'Percy Jackson - Az olimposz hőse', NULL),
-(3, 1955, 'tudományos-fantasztikus', 'Isaac Asimov', 'Veszprém', 'GABO', 'használt', 'Az idő urai', NULL),
-(3, 1991, 'tudományos-fantasztikus', 'Isaac Asimov', 'Veszprém', 'Móra', 'használt', 'Én, a robot', NULL),
-(1, 1998, 'informatika', 'Dirk Louis - Peter Müller', 'Pest', 'Panem', 'újszerű', 'JAVA - Belépés az Internet-programozás világába', NULL),
-(2, 2020, 'pszichológia', 'Vekerdy Tamás', 'Pest', 'Kulcslyuk', 'újszerű', 'Kamaszkor körül', NULL),
-(2, 1996, 'pszichológia', 'Rita L. Atkinson', 'Pest', 'Osiris', 'használt', 'Pszichológia', NULL),
-(3, 1998, 'tankönyv', 'Yaesko Nakanishi', 'Veszprém', 'Gakken', 'használt', 'Japanese for Everyone', NULL),
-(11, 2010, 'gasztronómia', 'Bereznay Tamás', 'Heves', 'Boook', 'újszerű', 'Süteményeskönyv', NULL),
-(11, 2011, 'gasztronómia', 'Bereznay Tamás', 'Heves', 'Boook', 'újszerű', 'Főzni gyerekjáték', NULL),
-(20, 2008, 'szépirodalom', 'Viktor Pelevin', 'Pest', 'Európa', 'újszerű', 'Empire \'V\' - elbeszélés a valódi felsőbbrendű emberről', NULL),
-(10, 1987, 'szépirodalom', 'William Shakespeare', 'Fejér', 'Európa', 'használt', ' Sok hűhó semmiért', NULL),
-(10, 1986, 'szépirodalom', 'William Shakespeare', 'Fejér', 'Európa', 'használt', 'János király', NULL),
-(10, 1987, 'szépirodalom', 'William Shakespeare', 'Fejér', 'Európa', 'használt', 'A két veronai nemes', NULL),
-(2, 1983, 'szépirodalom', 'Jack Keroac', 'Pest', 'Európa', 'használt', 'Úton', NULL),
-(4, 2001, 'vallás és filozófia', 'Vekerdi József', 'Somogy', 'Farkas Lőrinc Imre Kiadó', 'használt', 'Buddha beszédei', NULL),
-(2, 1998, 'pszichológia', 'G.W. Allport', 'Pest', 'Kairosz Kiadó', 'használt', 'A személyiség alakulás', NULL),
-(5, 1998, 'sport', 'Ueshiba - Stevens', 'Nógrád', 'Szenzár', 'használt', 'Az Aikido esszenciája', NULL),
-(5, 1877, 'művészet', 'Tóth Ervin', 'Nógrád', 'Officina', 'antik', 'A japán fametszet', NULL),
-(5, 2001, 'sport', 'Kassai Lajos', 'Nógrád', 'Dee-sign', 'használt', 'Lovasíjászat', NULL),
-(9, 2002, 'szépirodalom', 'Christopher Moore ', 'Tolna', 'Agave', 'újszerű', 'Biff Evangéliuma', NULL);
+INSERT INTO `books` (`owner_id`, `year`, `category`, `author`, `county`, `publisher`, `quality`, `title`, `reserved`, `picture`) VALUES
+(6, 1955, 'fantasy', 'J.R.R. Tolkien', 'Heves ', 'Allen & Unwin', 'használt', 'A gyűrűk ura', NULL, '1.png'),
+(9, 1997, 'ifúsági', 'J.K. Rowling', 'Vas', 'Bloomsbury', 'használt', 'Harry Potter és a bölcsk köve', NULL, '1.png'),
+(1, 1988, 'ismeretterjesztő', 'Stephen Hawking', 'Pest', 'Bantam Books', 'újszerű', 'Az idő rövid története', NULL, '1.png'),
+(8, 2005, 'fantasy', 'Rick Riordan', 'Somogy', 'Könyvmolyképző', 'használt', 'Percy Jackson - Az olimposz hőse', NULL,'1.png'),
+(3, 1955, 'tudományos-fantasztikus', 'Isaac Asimov', 'Veszprém', 'GABO', 'használt', 'Az idő urai', NULL, '1.png'),
+(3, 1991, 'tudományos-fantasztikus', 'Isaac Asimov', 'Veszprém', 'Móra', 'használt', 'Én, a robot', NULL, '1.png'),
+(1, 1998, 'informatika', 'Dirk Louis - Peter Müller', 'Pest', 'Panem', 'újszerű', 'JAVA - Belépés az Internet-programozás világába', NULL, '1.png'),
+(2, 2020, 'pszichológia', 'Vekerdy Tamás', 'Pest', 'Kulcslyuk', 'újszerű', 'Kamaszkor körül', NULL, '1.png'),
+(2, 1996, 'pszichológia', 'Rita L. Atkinson', 'Pest', 'Osiris', 'használt', 'Pszichológia', NULL, '1.png'),
+(3, 1998, 'tankönyv', 'Yaesko Nakanishi', 'Veszprém', 'Gakken', 'használt', 'Japanese for Everyone', NULL,  '1.png'),
+(11, 2010, 'gasztronómia', 'Bereznay Tamás', 'Heves', 'Boook', 'újszerű', 'Süteményeskönyv', NULL,  '1.png'),
+(11, 2011, 'gasztronómia', 'Bereznay Tamás', 'Heves', 'Boook', 'újszerű', 'Főzni gyerekjáték', NULL, '1.png'),
+(20, 2008, 'szépirodalom', 'Viktor Pelevin', 'Pest', 'Európa', 'újszerű', 'Empire \'V\' - elbeszélés a valódi felsőbbrendű emberről', NULL, '1.png'),
+(10, 1987, 'szépirodalom', 'William Shakespeare', 'Fejér', 'Európa', 'használt', ' Sok hűhó semmiért', NULL, '1.png'),
+(10, 1986, 'szépirodalom', 'William Shakespeare', 'Fejér', 'Európa', 'használt', 'János király', NULL, '1.png'),
+(10, 1987, 'szépirodalom', 'William Shakespeare', 'Fejér', 'Európa', 'használt', 'A két veronai nemes', NULL, '1.png'),
+(2, 1983, 'szépirodalom', 'Jack Keroac', 'Pest', 'Európa', 'használt', 'Úton', NULL, '1.png'),
+(4, 2001, 'vallás és filozófia', 'Vekerdi József', 'Somogy', 'Farkas Lőrinc Imre Kiadó', 'használt', 'Buddha beszédei', NULL, '1.png'),
+(2, 1998, 'pszichológia', 'G.W. Allport', 'Pest', 'Kairosz Kiadó', 'használt', 'A személyiség alakulás', NULL, '1.png'),
+(5, 1998, 'sport', 'Ueshiba - Stevens', 'Nógrád', 'Szenzár', 'használt', 'Az Aikido esszenciája', NULL, '1.png'),
+(5, 1877, 'művészet', 'Tóth Ervin', 'Nógrád', 'Officina', 'antik', 'A japán fametszet', NULL, '1.png'),
+(5, 2001, 'sport', 'Kassai Lajos', 'Nógrád', 'Dee-sign', 'használt', 'Lovasíjászat', NULL, '1.png'),
+(9, 2002, 'szépirodalom', 'Christopher Moore ', 'Tolna', 'Agave', 'újszerű', 'Biff Evangéliuma', NULL, '1.png');
 
 INSERT INTO `bookusers` (`username`, `password`, `email`, `is_admin`, `role`) VALUES
 ('Csajbók-Reményi László', 'password', 'Laci@gmail.com', b'1', 'ADMIN_ROLE'),

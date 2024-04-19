@@ -24,11 +24,19 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public List<Book> getBooks() {
+        for(Book b: bookRepository.findAll()) {
+            System.out.println(b.getId());
+        }
         return bookRepository.findAll();
     }
     @Override
     public List<Book> getBooks(Optional<String> q) {
+
         if (q.isEmpty()) {
+            for(Book b: bookRepository.findAll()) {
+                System.out.println(b.getId());
+            }
+
             return bookRepository.findAll();
         } else {
             List<Book> books = new ArrayList<>();

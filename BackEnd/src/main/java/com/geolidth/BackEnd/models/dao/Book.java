@@ -30,13 +30,14 @@ public class Book {
     private String quality;
     @Column(length = 6)
     private Integer year;
-    @Column(name = "reserved")
+    @Column(length = 1)
     private Boolean reserved;
+    @Column(length = 10)
+    private String picture;
     @ManyToOne
     @JsonIdentityReference(alwaysAsId = true)
     @JsonProperty("owner_Id")
     private BookUser owner;
-    private String picture;
 
     public Book(Integer id, String title, String author, String publisher, String category, String county, String quality, Integer year, String picture) {
         this.id = id;

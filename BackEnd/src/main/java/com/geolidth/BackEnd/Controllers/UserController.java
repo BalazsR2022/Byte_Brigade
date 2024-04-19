@@ -17,11 +17,12 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Objects;
-//@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
+@CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
 //@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
-@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
-@RequestMapping("/api")
+//@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN')")
+//@RequestMapping("/api")
+@RequestMapping("/users")
 public class UserController {
     private final UserService userService;
     private final BookService bookService;

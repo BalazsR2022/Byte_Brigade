@@ -64,10 +64,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "2023.08.12:build:production"
+              "buildTarget": "2023.08.12:build:production"
             },
             "development": {
-              "browserTarget": "2023.08.12:build:development"
+              "buildTarget": "2023.08.12:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -75,7 +75,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "2023.08.12:build"
+            "buildTarget": "2023.08.12:build"
           }
         },
         "test": {
