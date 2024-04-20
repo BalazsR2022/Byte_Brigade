@@ -6,5 +6,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./service.component.css']
 })
 export class ServiceComponent {
+giveBook(){
+  window.location.assign("/booksadmin");
+}
 
+readBook(){
+  window.location.assign("/home");
+}
 }
