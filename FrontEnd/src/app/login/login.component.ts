@@ -35,18 +35,20 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
+    
+    console.log(this.users)
     for (let i = 0; this.users.getValue().length; i++) {
       if (this.users.getValue()[i].username == this.loginUser.email&&this.users.getValue()[i].role=="ADMIN_ROLE") { 
-        this.router.navigateByUrl('/booksadmin');
+        console.log(this.loginUser);
        }
        else if (this.users.getValue()[i].username == this.loginUser.email&&this.users.getValue()[i].role=="USER_ROLE") { 
         window.location.assign('/home');
        }
-       else{
+       else if (this.users.getValue()[i].username == this.loginUser.email&&(this.users.getValue()[i].role==""||this.users.getValue()[i].role==null)) {
         window.location.assign('/signup');
        }
+       
     }
-
     if (this.users) {
       
     }
