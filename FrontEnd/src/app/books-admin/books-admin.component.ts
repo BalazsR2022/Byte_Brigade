@@ -7,6 +7,10 @@ import { BooksAdminService } from '../books-admin.service';
   styleUrls: ['./books-admin.component.css']
 })
 export class BooksAdminComponent {
+  show=false;
+  private code="almafa12";
+  userCode="";
+  buttonText="Validál";
 oszlopok=[
   {key:"id",text:"id", type:"plain"},
   {key:"author",text:"Szerző", type:"text"},
@@ -56,6 +60,19 @@ updateBook(book:any){
   
 deleteBook(book:any){
   this.bookservice.deleteBook(book);
+  }
+
+  validate(){
+    if(this.buttonText=="Lezár"){
+      this.show=false;
+      this.buttonText="Validál";
+    }
+    if(this.userCode==this.code){
+      this.show=true;
+      this.userCode="";
+      this.buttonText="Lezár";
+    }
+    
   }
 }
 

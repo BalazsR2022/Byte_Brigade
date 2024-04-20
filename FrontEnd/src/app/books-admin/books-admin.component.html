@@ -17,9 +17,12 @@
         </div>
     </div>
 
+    <div class="field columns is-vcentered mt-3">
+        <input *ngIf="!show" class="column is-one-quarter input mt-2 is-info is-rounded has-text-info-dark" type="password" [(ngModel)]="userCode">
+        <button class="column is-one-quarter button mt-2" (click)="validate()">{{this.buttonText}}</button>
+    </div>
 
-    <div class="container m-2">
-
+    <div *ngIf="show" class="container m-2">
         <div *ngFor="let book of books" class="row">
             <div *ngFor="let o of oszlopok" class="col">
                 <ng-container *ngIf="o.type=='bool'">
