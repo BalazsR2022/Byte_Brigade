@@ -1,6 +1,7 @@
 package com.geolidth.BackEnd.services;
 
 import com.geolidth.BackEnd.exceptions.NoSuchUserException;
+import com.geolidth.BackEnd.models.UserRole;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewUser;
@@ -38,6 +39,7 @@ public class UserServiceImpl implements UserService {
         bookUser.setUsername(newUser.getUsername());
         bookUser.setPassword(newUser.getPassword());
         bookUser.setEmail(newUser.getEmail());
+        bookUser.setRole(newUser.getRole());
         List<String> roles = new ArrayList<>();
         roles.add("ROLE_USER");
         return bookUserRepository.save(bookUser);
@@ -67,7 +69,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setUsername(userDetails.getUsername());
         existingUser.setPassword(userDetails.getPassword());
         existingUser.setEmail(userDetails.getEmail());
-
+        
         return bookUserRepository.save(existingUser);
     }
 

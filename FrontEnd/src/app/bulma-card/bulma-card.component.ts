@@ -48,13 +48,11 @@ export class BulmaCardComponent implements OnInit {
     });
 }
 reservedBook(book:any){
-  console.log("foglalás: "+book.id);
   book.reserved=true;
   this.updateBook(book)
 }
 
 updateBook(book:any){
-  console.log(book);
   this.bookservice.updateBook(book);
   }
 }

@@ -61,6 +61,7 @@ export class UserComponent implements OnInit {
     });
     this.user = {};
   }
+
   createUser() {
     this.user.isAdmin=false
     console.log(this.user);
@@ -77,8 +78,8 @@ export class UserComponent implements OnInit {
   }
 
   updateUser(data: any) {
-    console.log(this.user);
-    this.base.updateUser(data.id, data).subscribe({
+    console.log(data);
+    this.base.updateUser(data).subscribe({
       next: (res) => {
         console.log(res);
         this.base.loadUsers();

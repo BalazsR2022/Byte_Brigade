@@ -12,14 +12,10 @@
             <label for="email" class="label has-text-light">Emailcím</label>
             <input type="email" id="email" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.email">
         </div>
-        <div class="field">
-            <label for="role" class="label has-text-light">Szerepkör</label>
-            <input type="text" id="role" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.role">
-        </div>
         <button type="button" (click)="saveUser()" class="button is-primary has-text-dark">Felhasználó létrehozása</button>
     </div>
 
-    <div class="field columns mt-3">
+    <div class="field columns is-vcentered mt-3">
         <input *ngIf="!show" class="column is-one-quarter input mt-2 is-info is-rounded has-text-info-dark" type="password" [(ngModel)]="userCode">
         <button class="column is-one-quarter button mt-2" (click)="validate()">{{this.buttonText}}</button>
     </div>

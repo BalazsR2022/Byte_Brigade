@@ -12,7 +12,6 @@ export class HomeComponent{
     this.base.getBooks().subscribe({
       next:(data)=>{
         this.jsonData=data;
-        console.log(this.jsonData);
       }
     })
   }

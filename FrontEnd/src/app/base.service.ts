@@ -96,17 +96,17 @@ private userSubject = new Subject();
    }
 
    postUser(body:any){
-    // let endpoint = "users";
-    // let url=this.host+endpoint;
+    let endpoint = "users";
+    let url=this.host+endpoint;
     const result = this.http.post(this.userUrl,body);
     return result;
    }
 
-   updateUser(id:number, body:any){
-    // let endpoint = "users/";
-    // let url=this.host+endpoint+id;
-    console.log("userup",body,id)
-    const result = this.http.put(this.userUrl,body);
+   updateUser(body:any){
+    let endpoint = "users/";
+    let url=this.host+endpoint+body.id;
+    console.log("userup",body)
+    const result = this.http.put(url,body);
     return result;
    }
 

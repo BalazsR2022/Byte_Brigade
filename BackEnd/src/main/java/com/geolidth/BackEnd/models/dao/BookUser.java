@@ -31,11 +31,11 @@ public class BookUser implements UserDetails {
     @Column(length = 50)
     private String username;
 
-    @JsonIgnore
+
     @Column(length = 100)
     private String password;
 
-    @JsonIgnore
+
     @Column(length = 100)
     private String email;
 
@@ -91,7 +91,8 @@ public class BookUser implements UserDetails {
         if (role != null) {
             return role;
         } else {
-            throw new RuntimeException("Jogosultság nincs beállítva");
+            setRole(UserRole.Role.USER_ROLE);
+            return role;
         }
     }
 

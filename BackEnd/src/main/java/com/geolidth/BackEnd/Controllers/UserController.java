@@ -2,6 +2,7 @@ package com.geolidth.BackEnd.Controllers;
 
 import com.geolidth.BackEnd.exceptions.ForbiddenActionException;
 import com.geolidth.BackEnd.exceptions.NoSuchBookException;
+import com.geolidth.BackEnd.models.UserRole;
 import com.geolidth.BackEnd.models.dao.Book;
 import com.geolidth.BackEnd.models.dao.BookUser;
 import com.geolidth.BackEnd.models.dto.NewUser;
@@ -18,6 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Objects;
+
+import static org.springframework.http.HttpStatus.CREATED;
+
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
 //@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
@@ -47,25 +51,24 @@ public class UserController {
         BookUser user = userService.findUserByUsername(username);
         return ResponseEntity.ok(user);
     }
-    /*@PostMapping("/signup")
+    @PostMapping
     public ResponseEntity<BookUser> signUp(@RequestBody NewUser newUserRequest) {
         BookUser savedUser = userService.save(new BookUser(newUserRequest));
+        if(savedUser.getRole().toString()!="ADMIN_ROLE"){
+            savedUser.setRole(UserRole.Role.USER_ROLE);
+            savedUser.setAdmin(false);
+        }
         return ResponseEntity.status(CREATED).body(savedUser);
-    }*/
+    }
 
     @PostMapping("/users/book")
     public ResponseEntity<Book> addBook(@RequestBody Book book) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.addBook(book));
+        return ResponseEntity.status(CREATED).body(userService.addBook(book));
     }
 
-    @PutMapping("/users/{userId}")
+    @PutMapping("/{userId}")
     public ResponseEntity<BookUser> updateUser(@PathVariable Integer userId,
                                                @RequestBody NewUser userDetails) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        BookUser currentUser = (BookUser) authentication.getPrincipal();
-        if (!Objects.equals(currentUser.getId(), userId)) {
-            throw new ForbiddenActionException("Nincs jogosultsága a felhasználó módosításához");
-        }
         return ResponseEntity.status(HttpStatus.OK)
                 .body(userService.updateUser(userId, userDetails));
     }
@@ -114,6 +117,6 @@ public class UserController {
     public ResponseEntity<Void> reserveBook(@PathVariable Long bookId,
             Authentication authentication) {
         userService.reserveBook(bookId, ((BookUser) authentication.getPrincipal()).getId());
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.status(CREATED).build();
     }
 }
