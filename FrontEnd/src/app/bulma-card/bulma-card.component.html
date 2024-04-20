@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="level">
-                            <div *ngIf="book.reserved!=0&&!book.reserved" class="level-left level-item"><button (click)="reservedBook(book)" class="button is-info gomb">Foglal</button></div>
+                            <div *ngIf="(book.reserved!=null||book.reserved!=0)&&!book.reserved" class="level-left level-item"><button (click)="reservedBook(book)" class="button is-info gomb">Foglal</button></div>
                             <div *ngIf="book.reserved" class="level-left level-item"><span class="has-text-danger subtitle">Foglalt</span></div>
                             <div class="level-right level-item subtitle">{{book.year}}</div>
                         </div>
@@ -47,4 +47,12 @@
             </h1>
         </div>
     </ng-container>
+
+    <div class="modal">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+          <!-- Any other Bulma elements you want -->
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+      </div>
 </section>
