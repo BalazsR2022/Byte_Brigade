@@ -55,9 +55,9 @@ private userSubject = new Subject();
     return result;
    }
 
-   updateBook(id:number, body:any){
+   updateBook(body:any){
     let endpoint = "books/";
-    let url=this.host+endpoint+id;
+    let url=this.host+endpoint+body.id;
     const result = this.http.put(url,body);
     return result;
    }

@@ -80,9 +80,6 @@ public Book save(NewBook newBook) throws NoSuchUserException {
         BookUser user = userService.getById(bookId);
         Optional<Book> bookOptional = bookRepository.findById(bookId);
         if (bookOptional.isPresent()) {
-            if (!bookOptional.get().getOwner().getId().equals(user.getId())) {
-                throw new ForbiddenActionException("Nincs jogosultsága a könyv adatainak frissítéséhez");
-            }
             Book book = bookOptional.get();
             if (updateBook.getTitle() != null && !updateBook.getTitle().isBlank()) {
                 book.setTitle(updateBook.getTitle());

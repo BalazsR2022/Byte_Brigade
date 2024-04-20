@@ -45,17 +45,9 @@ public class BookController {
     @PutMapping("/{bookId}")
     public ResponseEntity<Book> updateBook(
             @PathVariable int bookId,
-            @RequestBody UpdateBook updateBook, Authentication auth) {
-        if (auth.getPrincipal() instanceof BookUser) {
-            BookUser user = (BookUser) auth.getPrincipal();
-            if (user.getRole() != UserRole.Role.ADMIN_ROLE) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            }
-            Book updatedBook = bookService.updateBook(bookId, updateBook);
-            return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+            @RequestBody UpdateBook updateBook) {
+        Book updatedBook = bookService.updateBook(bookId, updateBook);
+        return ResponseEntity.status(HttpStatus.OK).body(updatedBook);
     }
     @DeleteMapping("/{bookId}")
     public ResponseEntity<?> deleteBook(@PathVariable Integer bookId) {

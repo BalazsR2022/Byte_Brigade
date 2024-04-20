@@ -31,7 +31,7 @@ export class BooksAdminService {
     })
    }
    updateBook(book:any){
-    this.http.put(this.url+"/"+book.id, book).subscribe(()=>{this.loadBooks()})
+    this.base.updateBook(book).subscribe(()=>{this.loadBooks()})
    }
    deleteBook(book:any){
     console.log(book.id)

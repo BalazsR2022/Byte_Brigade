@@ -50,10 +50,11 @@ createBook(){
   }
 
 updateBook(book:any){
-  this.bookservice.updateBook(book)
+  console.log(book);
+  this.bookservice.updateBook(book);
   }
 deleteBook(book:any){
-  this.bookservice.deleteBook(book)
+  this.bookservice.deleteBook(book);
   }
 }
 
