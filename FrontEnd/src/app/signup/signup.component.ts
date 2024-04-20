@@ -9,6 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 export class SignupComponent {
   userForm!: FormGroup;
   userFormValid: boolean = true;
+  secret=true;
 
   constructor(private elRef: ElementRef) {
     this.initUserForm();

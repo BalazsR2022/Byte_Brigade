@@ -9,6 +9,10 @@ import { BaseService } from '../base.service';
 export class UserComponent implements OnInit {
   userDatas: any;
   emptyData = true;
+  show=false;
+  private code="almafa12";
+  userCode="";
+  buttonText="Validál";
   passwordVisible = false;
   user: any = {};
   name: any;
@@ -83,5 +87,18 @@ export class UserComponent implements OnInit {
         console.log('Hiba a felhasználó létrehozásakor: ' + err);
       }
     });
+  }
+
+  validate(){
+    if(this.buttonText=="Lezár"){
+      this.show=false;
+      this.buttonText="Validál";
+    }
+    if(this.userCode==this.code){
+      this.show=true;
+      this.userCode="";
+      this.buttonText="Lezár";
+    }
+    
   }
 }
