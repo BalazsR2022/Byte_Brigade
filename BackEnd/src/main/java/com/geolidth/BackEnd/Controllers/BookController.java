@@ -31,23 +31,15 @@ public class BookController {
         List<Book> books = bookService.searchBooks(query);
         return ResponseEntity.ok(books);
     }
+
     @GetMapping("/{id}")
     public ResponseEntity<Book> getById(@PathVariable int id) {
         Book book = bookService.getById(id);
         return ResponseEntity.status(HttpStatus.OK).body(book);
     }
     @PostMapping
-    public ResponseEntity<Book> save(@RequestBody NewBook newBook, Authentication auth) {
-        if (auth == null || !auth.isAuthenticated()) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-
-        BookUser user = (BookUser) auth.getPrincipal();
-        if (user.getAuthorities().stream().noneMatch(r -> r.getAuthority().equals("ROLE_ADMIN"))) {
-            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-        }
-
-        Book savedBook = bookService.save(new NewBook());
+    public ResponseEntity<Book> save(@RequestBody NewBook newBook) {
+        Book savedBook = bookService.save(newBook);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
     @PutMapping("/{bookId}")
@@ -66,17 +58,9 @@ public class BookController {
         }
     }
     @DeleteMapping("/{bookId}")
-    public ResponseEntity<?> deleteBook(@PathVariable Integer bookId, Authentication auth) {
-        if (auth.getPrincipal() instanceof BookUser) {
-            BookUser user = (BookUser) auth.getPrincipal();
-            if (user.getRole() != UserRole.Role.ADMIN_ROLE) {
-                return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
-            }
-            bookService.deleteBook(bookId);
-            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    public ResponseEntity<?> deleteBook(@PathVariable Integer bookId) {
+        bookService.deleteBook(bookId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
     @PostMapping("/{bookId}/reserve")
     public ResponseEntity<Void> reserveBook(@PathVariable Integer bookId, Authentication auth) {

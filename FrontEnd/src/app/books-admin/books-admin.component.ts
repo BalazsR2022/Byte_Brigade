@@ -8,7 +8,7 @@ import { BooksAdminService } from '../books-admin.service';
 })
 export class BooksAdminComponent {
 oszlopok=[
-  {key:"id",text:"id", type:"plain"},
+  {key:"id",text:"id", type:"text"},
   {key:"author",text:"Szerző", type:"text"},
   {key:"category",text:"Kategória", type:"text"},
  {key:"county",text:"Megye", type:"text"},
@@ -43,9 +43,8 @@ this.bookservice.getBooks().subscribe(data=>{
 }
 
 createBook(){
-  this.newBook.id=0
-  this.newBook.reserved=false
-
+  this.newBook.id=null;
+  this.newBook.reserved=false;
   console.log(this.newBook)
   this.bookservice.createBook(this.newBook)
   }

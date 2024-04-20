@@ -8,7 +8,7 @@ import lombok.Setter;
 @Setter
 @Data
 public class NewBook {
-    private Integer id;
+    //private Integer id;
     private String title;
     private String author;
     private String publisher;

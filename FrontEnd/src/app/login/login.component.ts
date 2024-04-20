@@ -14,8 +14,7 @@ export class LoginComponent implements OnInit{
     loginUser:any={}
     users:any=[]
     constructor(private auth:AuthService, private formBuilder: FormBuilder, private base:BaseService, private router:Router) {
-      this.base.getUsers().subscribe(res=>this.users=res)
-
+      this.base.getUsers().subscribe(res=>this.users=res);
     }
 
     ngOnInit(): void {
@@ -27,15 +26,18 @@ export class LoginComponent implements OnInit{
     }
 
     login(){
+      console.log(this.users)
       this.users=this.users.filter(
-        (res:any)=> {return (res.email==this.loginUser.email && res.password==this.loginUser.password)}
+        (res:any)=> {
+          if(res.username==this.loginUser.email)console.log(this.loginUser)
+          return (res.username==this.loginUser.email && res.password==this.loginUser.password)}
       )
 
       if (this.users){
-        this.router.navigate(['/home'])
+        this.router.navigateByUrl('')
       }
       else{
-        // Sikertellen belépés
+        // Sikertelen belépés
       }
 
       // let user = this.loginForm.value.user;

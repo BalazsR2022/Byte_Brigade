@@ -6,8 +6,10 @@ import { Subject } from 'rxjs';
   providedIn: 'root'
 })
 export class BaseService {
-url =  'http://172.16.16.136:5091/api/Books/'
-userUrl =  'http://172.16.16.136:5091/api/Users/'
+//url =  'http://172.16.16.136:5091/api/Books/'
+//userUrl =  'http://172.16.16.136:5091/api/Users/'
+url='http://localhost:8080/api/books/';
+userUrl= 'http://localhost:8080/users/'
 private host="http://localhost:8080/";
 private bookSubject = new Subject();
 private userSubject = new Subject();
@@ -39,38 +41,38 @@ private userSubject = new Subject();
 
    loadThisBook(id:number){
     let endpoint = "guest/books";
-    let url=this.host+endpoint;
-    return this.http.get(url+"/"+id).subscribe({
+    let urlD=this.host+endpoint;
+    return this.http.get(urlD+"/"+id).subscribe({
       next:(data)=>this.bookSubject.next(data),
       error:(err)=>console.log("Hiba a kijelölt könyv lekérésekor: ", err)
     });
    }
 
    postBook(body:any){
-    // let endpoint = "guest/books";
-    // let url=this.host+endpoint;
-    const result = this.http.post(this.url,body);
+    let endpoint = "books";
+    let url=this.host+endpoint;
+    const result = this.http.post(url,body);
     return result;
    }
 
    updateBook(id:number, body:any){
-    let endpoint = "guest/books/";
+    let endpoint = "books/";
     let url=this.host+endpoint+id;
     const result = this.http.put(url,body);
     return result;
    }
 
    deleteBook(id:number){
-    let endpoint = "guest/books";
-    let url=this.host+endpoint;
-    const result = this.http.delete(url+"/"+id);
+    let endpoint = "books/";
+    let url=this.host+endpoint+id;
+    const result = this.http.delete(url);
     return result;
    }
 
    loadUsers(){
-    // let endpoint = "users";
-    // let url=this.host+endpoint;
-    return this.http.get(this.userUrl).subscribe({
+    let endpoint = "users";
+    let url=this.host+endpoint;
+    return this.http.get(url).subscribe({
       next:(data)=>this.userSubject.next(data),
       error:(err)=>console.log("Hiba a felhasználók lekérésekor: ", err)
     });

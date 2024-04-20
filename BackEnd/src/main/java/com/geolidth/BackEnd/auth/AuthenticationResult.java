@@ -1,6 +1,8 @@
 package com.geolidth.BackEnd.auth;
 
+import lombok.Getter;
 import org.springframework.security.core.Authentication;
+
 
 public class AuthenticationResult {
 
@@ -12,11 +14,4 @@ public class AuthenticationResult {
         this.authentication = authentication;
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
-
-    public Authentication getAuthentication() {
-        return authentication;
-    }
 }

@@ -58,7 +58,18 @@ public Book getById(int id) throws NoSuchBookException {
 }
 @Override
 public Book save(NewBook newBook) throws NoSuchUserException {
-    Book book = convertToBook(newBook.getId(), newBook);
+    //Book book = convertToBook(newBook.getId(), newBook);
+    //return bookRepository.save(book);
+    Book book = new Book();
+    book.setTitle(newBook.getTitle());
+    book.setCounty(newBook.getCounty());
+    book.setCategory(newBook.getCategory());
+    book.setYear(newBook.getYear());
+    book.setQuality(newBook.getQuality());
+    book.setPublisher(newBook.getPublisher());
+    book.setPicture(newBook.getPicture());
+    book.setAuthor(newBook.getAuthor());
+    book.setReserved(false);
     return bookRepository.save(book);
 }
 
@@ -105,30 +116,14 @@ public Book save(NewBook newBook) throws NoSuchUserException {
         BookUser user = userService.getById(bookId);
         Optional<Book> book = bookRepository.findById(bookId);
         if (book.isPresent()) {
-            if (book.get().getOwner().getId().equals(user.getId())) {
+
                 bookRepository.deleteById(bookId);
-            } else {
-                throw new ForbiddenActionException("Nincs jogosultsága a könyv törléséhez");
-            }
+
         } else {
             throw new NoSuchBookException();
         }
     }
-    public Book convertToBook(Integer userId, NewBook newBook) throws  NoSuchUserException {
-        BookUser user = userService.getById(userId);
-        Book book = new Book(
-                newBook.getId(),
-                newBook.getTitle(),
-                newBook.getAuthor(),
-                newBook.getPublisher(),
-                newBook.getCategory(),
-                newBook.getCounty(),
-                newBook.getQuality(),
-                newBook.getYear(),
-                newBook.getPicture());
-        book.setOwner(user);
-        return book;
-    }
+
     @Override
     public void reserveBook(Integer bookId) throws NoSuchBookException {
         Optional<Book> optionalBook = bookRepository.findById(bookId);

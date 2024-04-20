@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Objects;
 @CrossOrigin(origins = "http://localhost:4200",allowedHeaders = "*")
 //@CrossOrigin(origins = "*",allowedHeaders = "*")
@@ -31,6 +32,13 @@ public class UserController {
         this.userService = userService;
         this.bookService = bookService;
     }
+
+    @GetMapping
+    public ResponseEntity<?> getUsers(){
+        List<BookUser> users=userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
 
     @GetMapping("/user/profile")
     public ResponseEntity<?> getUserProfile() {
