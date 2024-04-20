@@ -87,15 +87,10 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/users/{userId}")
+    @DeleteMapping("/{userId}")
     public ResponseEntity<Void> deleteUserData(@PathVariable Integer userId) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        BookUser currentUser = (BookUser) authentication.getPrincipal();
-        if (!Objects.equals(currentUser.getId(), userId)) {
-            throw new ForbiddenActionException("Nincs jogosultsága a felhasználó törléséhez");
-        }
-        userService.deleteUserData(userId);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        userService.deleteUser(userId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
     @DeleteMapping("/books/{bookId}")
     public ResponseEntity<Void> deleteBook(@PathVariable Integer bookId) {
