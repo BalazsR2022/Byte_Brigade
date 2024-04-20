@@ -1,19 +1,19 @@
 <section class="section">
     <div class="field">
         <div class="field">
-            <label for="name" class="label">Felhasználónév</label>
+            <label for="name" class="label has-text-light">Felhasználónév</label>
             <input type="text" id="name" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.username">
         </div>
         <div class="field">
-            <label for="pass" class="label">Jelszó</label>
+            <label for="pass" class="label has-text-light">Jelszó</label>
             <input type="text" id="pass" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.password">
         </div>
         <div class="field">
-            <label for="email" class="label">Emailcím</label>
+            <label for="email" class="label has-text-light">Emailcím</label>
             <input type="email" id="email" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.email">
         </div>
         <div class="field">
-            <label for="role" class="label">Szerepkör</label>
+            <label for="role" class="label has-text-light">Szerepkör</label>
             <input type="text" id="role" class="input mt-2 is-info  is-rounded has-text-info-dark" [(ngModel)]="user.role">
         </div>
         <button type="button" (click)="saveUser()" class="button is-primary has-text-dark">Felhasználó létrehozása</button>

@@ -6,11 +6,9 @@ import { BaseService } from '../base.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit{
+export class HomeComponent{
   jsonData: any;
   constructor(private base : BaseService){
-  }
-  ngOnInit(): void {
     this.base.getBooks().subscribe({
       next:(data)=>{
         this.jsonData=data;
@@ -18,5 +16,6 @@ export class HomeComponent implements OnInit{
       }
     })
   }
+  
 
 }

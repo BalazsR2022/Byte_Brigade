@@ -14,16 +14,13 @@
                             <div class="media-content">
                                 <p class="title is-4 cim cim-fixed">{{ book.title }}</p>
                                 <div class="level">
-                                    <div class="level-left level-item">
+                                    <div class="level-item">
                                         <div>
                                             <p class="subtitle is-6">Szerző: <b>{{ book.author }}</b></p>
-                                            <p class="subtitle is-6">Kategória: {{ book.category }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="level-right level-item">
-                                        <div>
-                                            <div class="subtitle is-6">Hely: {{book.county}}</div>
-                                            <div class="subtitle is-6">Állapot: {{book.quality}}</div>
+                                            <p class="subtitle is-6 is-mobile">Kategória: {{ book.category }}</p>
+                                        
+                                            <div class="subtitle is-6 is-mobile">Hely: {{book.county}}</div>
+                                            <div class="subtitle is-6 is-mobile">Állapot: {{book.quality}}</div>
                                         </div>
                                     </div>
                                 </div>
