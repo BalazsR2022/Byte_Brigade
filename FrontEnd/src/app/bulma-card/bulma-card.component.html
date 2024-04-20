@@ -30,7 +30,7 @@
                             </div>
                         </div>
                         <div class="level">
-                            <div *ngIf="book.reserved!=0&&!book.reserved" class="level-left level-item"><button (click)="reservedBook(book.id)" class="button is-info gomb">Foglal</button></div>
+                            <div *ngIf="book.reserved!=0&&!book.reserved" class="level-left level-item"><button (click)="reservedBook(book)" class="button is-info gomb">Foglal</button></div>
                             <div *ngIf="book.reserved" class="level-left level-item"><span class="has-text-danger subtitle">Foglalt</span></div>
                             <div class="level-right level-item subtitle">{{book.year}}</div>
                         </div>

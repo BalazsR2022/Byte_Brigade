@@ -2,6 +2,7 @@ import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import { JsonReaderService } from '../json-reader.service';
 import { BaseService } from '../base.service';
+import { BooksAdminService } from '../books-admin.service';
 
 
 
@@ -13,7 +14,7 @@ import { BaseService } from '../base.service';
 export class BulmaCardComponent implements OnInit {
   jsonData: any;
   emptyData =true;
-  constructor(private base: BaseService) {
+  constructor(private base: BaseService, private bookservice:BooksAdminService) {
     this.base.getBooks().subscribe({
       next: (res)=>{
         this.jsonData=res;
@@ -46,7 +47,14 @@ export class BulmaCardComponent implements OnInit {
       }
     });
 }
-reservedBook(bookId:number){
-  console.log("foglalás: "+bookId);
+reservedBook(book:any){
+  console.log("foglalás: "+book.id);
+  book.reserved=true;
+  this.updateBook(book)
 }
+
+updateBook(book:any){
+  console.log(book);
+  this.bookservice.updateBook(book);
+  }
 }
