@@ -14,7 +14,17 @@ export class BulmaCardComponent implements OnInit {
   jsonData: any;
   emptyData =true;
   constructor(private base: BaseService) {
-
+    this.base.getBooks().subscribe({
+      next: (res)=>{
+        this.jsonData=res;
+        this.emptyData=false;
+        
+      },
+      error: (err)=>{
+        console.log('Hiba az oldalon: ' + err);
+        this.emptyData=true;
+      }
+    });
   }
 
   ngOnInit(): void {

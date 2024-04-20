@@ -19,7 +19,6 @@ export class SurpriseComponent  {
   image:any="regény";
   constructor(private base: BaseService, private http: HttpClient) { 
     this.initBooks();
-    
   }
 
   initBooks() {

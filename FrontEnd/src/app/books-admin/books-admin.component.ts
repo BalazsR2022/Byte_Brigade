@@ -53,6 +53,7 @@ updateBook(book:any){
   console.log(book);
   this.bookservice.updateBook(book);
   }
+  
 deleteBook(book:any){
   this.bookservice.deleteBook(book);
   }

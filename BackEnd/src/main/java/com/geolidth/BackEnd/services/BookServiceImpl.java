@@ -110,12 +110,10 @@ public Book save(NewBook newBook) throws NoSuchUserException {
     }
 
     public void deleteBook(Integer bookId) throws NoSuchUserException, NoSuchBookException, ForbiddenActionException {
-        BookUser user = userService.getById(bookId);
+        //BookUser user = userService.getById(bookId);
         Optional<Book> book = bookRepository.findById(bookId);
         if (book.isPresent()) {
-
                 bookRepository.deleteById(bookId);
-
         } else {
             throw new NoSuchBookException();
         }
