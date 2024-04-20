@@ -102,6 +102,9 @@ public Book save(NewBook newBook) throws NoSuchUserException {
             if (updateBook.getYear() != null && updateBook.getYear() != 0) {
                 book.setYear(updateBook.getYear());
             }
+            if (updateBook.getReserved()!= null){
+                book.setReserved(updateBook.getReserved());
+            }
 
             return bookRepository.save(book);
         } else {

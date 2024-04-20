@@ -13,3 +13,7 @@
 .footer .content {
     font-size: 14px; /* Vékonyabb szöveg mérete */
 }
+
+.no-underline{
+    text-decoration: none;
+}

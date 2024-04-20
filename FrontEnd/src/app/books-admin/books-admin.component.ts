@@ -8,7 +8,7 @@ import { BooksAdminService } from '../books-admin.service';
 })
 export class BooksAdminComponent {
 oszlopok=[
-  {key:"id",text:"id", type:"text"},
+  {key:"id",text:"id", type:"plain"},
   {key:"author",text:"Szerző", type:"text"},
   {key:"category",text:"Kategória", type:"text"},
  {key:"county",text:"Megye", type:"text"},

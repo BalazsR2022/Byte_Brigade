@@ -16,7 +16,6 @@ private userSubject = new Subject();
   constructor(private http : HttpClient) {
     this.http=http;
     this.loadBooks();
-    // this.getBooks();
     this.loadUsers();
     this.getUsers();
    }
