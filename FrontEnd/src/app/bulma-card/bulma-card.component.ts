@@ -1,6 +1,4 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
-import { JsonReaderService } from '../json-reader.service';
 import { BaseService } from '../base.service';
 import { BooksAdminService } from '../books-admin.service';
 
@@ -14,12 +12,13 @@ import { BooksAdminService } from '../books-admin.service';
 export class BulmaCardComponent implements OnInit {
   jsonData: any;
   emptyData =true;
+  filter!:string;
   constructor(private base: BaseService, private bookservice:BooksAdminService) {
     this.base.getBooks().subscribe({
       next: (res)=>{
         this.jsonData=res;
         this.emptyData=false;
-        
+
       },
       error: (err)=>{
         console.log('Hiba az oldalon: ' + err);
@@ -39,7 +38,7 @@ export class BulmaCardComponent implements OnInit {
       next: (res)=>{
         this.jsonData=res;
         this.emptyData=false;
-        
+
       },
       error: (err)=>{
         console.log('Hiba az oldalon: ' + err);

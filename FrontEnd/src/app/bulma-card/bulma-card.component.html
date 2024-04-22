@@ -1,8 +1,12 @@
 <section class="section">
     <div *ngIf="jsonData">
+      <div class="level">
+        <div class="level-left"></div>
+        <div class="level-right"><input class="input level-item mt-3 is-info is-one-quarter" type="text" placeholder="Kereső" [(ngModel)]="filter"></div>
+      </div>
         <div class="columns prodList is-multiline is-variable">
-            <div class="column konyvecske is-one-third" *ngFor="let book of jsonData">
-                
+            <div class="column konyvecske is-one-third" *ngFor="let book of jsonData | filter:filter">
+
                 <div class="card has-background-grey-lighter">
                     <div class="card-image">
                         <figure class="is-4by3">
@@ -44,5 +48,5 @@
         </div>
     </ng-container>
 
-    
+
 </section>

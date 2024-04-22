@@ -22,6 +22,7 @@ import { ThisBookComponent } from './this-book/this-book.component';
 import { MysiteComponent } from './mysite/mysite.component';
 import { BooksAdminComponent } from './books-admin/books-admin.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FilterPipe } from './pipes/filter.pipe';
 
 
 @NgModule({
@@ -42,7 +43,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ThisBookComponent,
     MysiteComponent,
     BooksAdminComponent,
-    
+    FilterPipe
 
   ],
   imports: [

@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         existingUser.setUsername(userDetails.getUsername());
         existingUser.setPassword(userDetails.getPassword());
         existingUser.setEmail(userDetails.getEmail());
-        
+
         return bookUserRepository.save(existingUser);
     }
 
