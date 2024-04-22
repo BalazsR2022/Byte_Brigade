@@ -13,7 +13,8 @@ export class FilterPipe implements PipeTransform {
              item.author.toLowerCase().includes(filter.toLowerCase()) ||
              item.category.toLowerCase().includes(filter.toLowerCase()) ||
              item.county.toLowerCase().includes(filter.toLowerCase()) ||
-             item.quality.toLowerCase().includes(filter.toLowerCase());
+             item.quality.toLowerCase().includes(filter.toLowerCase()) ||
+             item.year.toString().includes(filter.toString().toLowerCase());
     });
   }
 
